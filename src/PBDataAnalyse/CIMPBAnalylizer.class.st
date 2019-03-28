@@ -1,8 +1,18 @@
 Class {
 	#name : #CIMPBAnalylizer,
 	#superclass : #Object,
+	#classVars : [
+		'Tickets'
+	],
 	#category : #PBDataAnalyse
 }
+
+{ #category : #accessing }
+CIMPBAnalylizer class >> Tickets [
+	Tickets
+		ifNil: [ Tickets := CSVParser parseFileWithHeader: 'ticketsCIM.csv' ].
+	^ Tickets
+]
 
 { #category : #utility }
 CIMPBAnalylizer class >> utility [
