@@ -1,6 +1,9 @@
 Class {
 	#name : #CIMPBAnalylizer,
 	#superclass : #Object,
+	#instVars : [
+		'tickets'
+	],
 	#classVars : [
 		'Tickets'
 	],
@@ -9,9 +12,12 @@ Class {
 
 { #category : #accessing }
 CIMPBAnalylizer class >> Tickets [
-	Tickets
-		ifNil: [ Tickets := CSVParser parseFileWithHeader: 'ticketsCIM.csv' ].
+	| tickets |
 	^ Tickets
+		ifNil: [ tickets := self new.
+			(CSVParser parseFileWithHeader: 'ticketsCIM.csv')
+				do: [ :each | tickets addTicketsWith: each ].
+			Tickets := tickets ]
 ]
 
 { #category : #utility }
@@ -33,4 +39,15 @@ ds barChartWithBarTitle: [:value| (dataSet keyAtValue: value) asString ].
 b add: ds.
 b axisX noLabel; noTick.
 b 
+]
+
+{ #category : #adding }
+CIMPBAnalylizer >> addTicketsWith:aDictionnary [
+tickets add: (CIMTicket createWith:aDictionnary).
+]
+
+{ #category : #initialization }
+CIMPBAnalylizer >> initialize [
+	super initialize.
+	tickets := OrderedCollection new
 ]
