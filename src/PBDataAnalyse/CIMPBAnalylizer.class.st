@@ -51,3 +51,8 @@ CIMPBAnalylizer >> initialize [
 	super initialize.
 	tickets := OrderedCollection new
 ]
+
+{ #category : #acessing }
+CIMPBAnalylizer >> tickets [
+	^ tickets
+]

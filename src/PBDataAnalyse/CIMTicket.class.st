@@ -26,7 +26,7 @@ CIMTicket class >> createWith: aDictionnary [
 		fTNumOrdre: (aDictionnary at: 'FT_NUMORDRE');
 		typCorrLibelle: (aDictionnary at: 'TYPCORR_LIBELLE');
 		priorite: (aDictionnary at: 'PRIORITE');
-		ftDateCrea: (aDictionnary at: 'FT_DATECREA');
+		ftDateCrea: (aDictionnary at: 'FT_DATECREA') asDate;
 		ftObjet: (aDictionnary at: 'FT_OBJET');
 		biblioNom: (aDictionnary at: 'BIBLIO_NOM');
 		versionLibelle: (aDictionnary at: 'VERSION_LIBELLE');
