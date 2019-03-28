@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'Tickets'
 	],
-	#category : #PBDataAnalyse
+	#category : #'PBDataAnalyse-Core'
 }
 
 { #category : #accessing }
