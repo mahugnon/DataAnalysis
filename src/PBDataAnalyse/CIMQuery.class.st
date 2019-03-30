@@ -16,13 +16,20 @@ CIMQuery class >> create [
 				select: [ :ticket | ticket priorite = self displayName ])
 ]
 
+{ #category : #'initailize-release' }
+CIMQuery class >> create: tickets [
+	^ self new
+		tickets:
+			(tickets select: [ :ticket | ticket priorite = self displayName ])
+]
+
 { #category : #accessing }
 CIMQuery class >> displayName [
 	^ self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
-CIMQuery >> biblioteques [
+CIMQuery >> bibliotheques [
 	^ (tickets collect: [ :ticket | ticket biblioNom ]) asSet
 ]
 
@@ -30,7 +37,7 @@ CIMQuery >> biblioteques [
 CIMQuery >> countBibliothequeOccurrence [
 	^ countBibliothequeOccurrence
 		ifNil: [ countBibliothequeOccurrence := Dictionary new.
-			self biblioteques
+			self bibliotheques
 				do: [ :bib | 
 					countBibliothequeOccurrence
 						at: bib

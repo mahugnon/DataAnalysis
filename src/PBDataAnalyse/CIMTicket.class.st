@@ -17,7 +17,7 @@ Class {
 	#classVars : [
 		'Tickets'
 	],
-	#category : #'PBDataAnalyse-Core'
+	#category : #'PBDataAnalyse-model'
 }
 
 { #category : #operations }
