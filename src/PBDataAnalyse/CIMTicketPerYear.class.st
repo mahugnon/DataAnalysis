@@ -29,6 +29,12 @@ CIMTicketPerYear >> ticketsGroupByYear [
 ]
 
 { #category : #'queries - methods' }
+CIMTicketPerYear >> ticketsGroupByYearFor: aBiblioNameString [
+	self ticketsGroupByYear
+		do: [ :each | each biblioNom = aBiblioNameString ]
+]
+
+{ #category : #'queries - methods' }
 CIMTicketPerYear >> years [
 	^ (tickets collect: [ :ticket | ticket ftDateCrea year ]) asSet
 ]
