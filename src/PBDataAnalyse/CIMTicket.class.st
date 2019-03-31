@@ -2,7 +2,6 @@ Class {
 	#name : #CIMTicket,
 	#superclass : #Object,
 	#instVars : [
-		'dateCrea',
 		'libelleCorr',
 		'fTNumOrdre',
 		'typCorrLibelle',
@@ -56,16 +55,6 @@ CIMTicket >> biblioNom: anObject [
 ]
 
 { #category : #accessing }
-CIMTicket >> dateCrea [
-	^ dateCrea
-]
-
-{ #category : #accessing }
-CIMTicket >> dateCrea: anObject [
-	dateCrea := anObject
-]
-
-{ #category : #accessing }
 CIMTicket >> fTNumOrdre [
 	^ fTNumOrdre
 ]
@@ -107,22 +96,17 @@ CIMTicket >> ftObjet: anObject [
 
 { #category : #accessing }
 CIMTicket >> isCorrectiveMaintenace [
-	^self libelleForCorrective anySatisfy: [ :lib | self libelleCorr beginsWith: lib]
-]
-
-{ #category : #accessing }
-CIMTicket >> libelleCorr [ 
-	^libelleCorr
-]
-
-{ #category : #accessing }
-CIMTicket >> libelleCorr: anObject [
-	libelleCorr := anObject
+	^self libelleForCorrective anySatisfy: [ :lib | self typCorrLibelle  beginsWith: lib]
 ]
 
 { #category : #accessing }
 CIMTicket >> libelleForCorrective [
 	^{'CORRECTION' . 'REGRESSION' . 'RUN/Anomalie' . 'ANOMALIE'}
+]
+
+{ #category : #accessing }
+CIMTicket >> libelleForEvolution [
+	^{'Evolution' . 'REGRESSION' . 'RUN/Anomalie' . 'ANOMALIE'}
 ]
 
 { #category : #accessing }
@@ -157,5 +141,5 @@ CIMTicket >> versionLibelle: anObject [
 
 { #category : #accessing }
 CIMTicket >> year [
-	^ dateCrea  year
+	^ ftDateCrea year
 ]

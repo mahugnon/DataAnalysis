@@ -8,15 +8,15 @@ Class {
 }
 
 { #category : #metrics }
+Bibliotheque >> numberOfAnomaliePerYear [
+]
+
+{ #category : #metrics }
 Bibliotheque >> numberOfEvolutionPerYear [
 ]
 
 { #category : #metrics }
 Bibliotheque >> numberOfImportantPerYear [
-]
-
-{ #category : #metrics }
-Bibliotheque >> numberOfRunAnomaliePerYear [
 ]
 
 { #category : #metrics }
