@@ -1,25 +1,28 @@
+"
+I want to know for a specific biblioNom  the number of important, urgent,tres important debugage or evolution per year .
+"
 Class {
 	#name : #Bibliotheque,
 	#superclass : #Object,
 	#category : #'PBDataAnalyse-model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #metrics }
 Bibliotheque >> numberOfEvolutionPerYear [
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #metrics }
 Bibliotheque >> numberOfImportantPerYear [
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #metrics }
 Bibliotheque >> numberOfRunAnomaliePerYear [
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #metrics }
 Bibliotheque >> numberOfTresImportantPerYear [
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #metrics }
 Bibliotheque >> numberOfUrgentPerYear [
 ]
