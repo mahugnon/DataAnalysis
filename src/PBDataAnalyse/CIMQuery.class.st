@@ -16,6 +16,13 @@ CIMQuery class >> create [
 				select: [ :ticket | ticket priorite = self displayName ])
 ]
 
+{ #category : #'initailize-release' }
+CIMQuery class >> create: tickets [
+	^ self new
+		tickets:
+			(tickets select: [ :ticket | ticket priorite = self displayName ])
+]
+
 { #category : #accessing }
 CIMQuery class >> displayName [
 	^ self subclassResponsibility
