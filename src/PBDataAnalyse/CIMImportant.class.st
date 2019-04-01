@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CIMImportant class >> displayName [
-	^ 'Important'
+	^ 'IMPORTANT'
 ]

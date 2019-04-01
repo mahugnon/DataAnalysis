@@ -12,15 +12,14 @@ Class {
 CIMQuery class >> create [
 	^ self new
 		tickets:
-			(CIMPBAnalyser Tickets tickets
+			(CIMPBAnalyser uniqueInstance  tickets
 				select: [ :ticket | ticket priorite = self displayName ])
 ]
 
 { #category : #'initailize-release' }
 CIMQuery class >> create: tickets [
 	^ self new
-		tickets:
-			(tickets select: [ :ticket | ticket priorite = self displayName ])
+		tickets: (tickets select: [ :ticket | ticket priorite = self displayName ])
 ]
 
 { #category : #accessing }
@@ -30,7 +29,8 @@ CIMQuery class >> displayName [
 
 { #category : #queries }
 CIMQuery >> biblioOccurenceUpperTo: aNumber [
-	^ self countBibliothequeOccurrence select: [ :each | each >= 1000 ]
+	^ self countBibliothequeOccurrence
+		select: [ :each | each >= aNumber ]
 ]
 
 { #category : #queries }
@@ -40,13 +40,15 @@ CIMQuery >> bibliotheques [
 
 { #category : #queries }
 CIMQuery >> countBibliothequeOccurrence [
+	countBibliothequeOccurrence
+		ifNotNil: [ ^ countBibliothequeOccurrence associations ].
+	countBibliothequeOccurrence := Dictionary new.
+	self bibliotheques
+		do: [ :bib | 
+			countBibliothequeOccurrence
+				at: bib
+				put: (tickets count: [ :ticket | ticket biblioNom = bib ]) ].
 	^ countBibliothequeOccurrence
-		ifNil: [ countBibliothequeOccurrence := Dictionary new.
-			self bibliotheques
-				do: [ :bib | 
-					countBibliothequeOccurrence
-						at: bib
-						put: (tickets count: [ :ticket | ticket biblioNom = bib ]) ] ]
 ]
 
 { #category : #accessing }

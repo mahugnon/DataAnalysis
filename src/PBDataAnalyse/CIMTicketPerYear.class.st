@@ -15,6 +15,14 @@ CIMTicketPerYear class >> create: tickets [
 ]
 
 { #category : #'queries - methods' }
+CIMTicketPerYear >> ticketsCountPerYear [
+	| ticketsGroup |
+	ticketsGroup := self ticketsGroupByYear.
+	^ ticketsGroup
+		keysDo: [ :year | ticketsGroup at: year put: (ticketsGroup at: year)size ]
+]
+
+{ #category : #'queries - methods' }
 CIMTicketPerYear >> ticketsForYear: aYear [
 	^ tickets select: [ :ticket | ticket ftDateCrea year = aYear ]
 ]
