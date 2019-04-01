@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMPBAnalylizer,
+	#name : #CIMPBAnalyser,
 	#superclass : #Object,
 	#instVars : [
 		'tickets'
@@ -7,21 +7,32 @@ Class {
 	#classVars : [
 		'Tickets'
 	],
+	#classInstVars : [
+		'UniqueInstance'
+	],
 	#category : #'PBDataAnalyse-Core'
 }
 
 { #category : #accessing }
-CIMPBAnalylizer class >> Tickets [
-	| tickets |
-	^ Tickets
-		ifNil: [ tickets := self new.
-			(CSVParser parseFileWithHeader: 'ticketsCIM.csv')
-				do: [ :each | tickets addTicketsWith: each ].
-			Tickets := tickets ]
+CIMPBAnalyser class >> default [
+	^ self uniqueInstance
+]
+
+{ #category : #'instance creation' }
+CIMPBAnalyser class >> new [
+	self error: 'CIMPBAnalyser is a singleton -- send uniqueInstance instead'
+]
+
+{ #category : #'instance creation' }
+CIMPBAnalyser class >> uniqueInstance [
+	"  UniqueInstance ifNil: [UniqueInstance := self basicNew initialize].
+       ^UniqueInstance"
+
+	^ UniqueInstance := self basicNew initialize
 ]
 
 { #category : #utility }
-CIMPBAnalylizer class >> utility [
+CIMPBAnalyser class >> utility [
 | data years dataSet b ds |
 data:=CSVParser parseFileWithHeader: 'ticketsCIM.csv'.
 years:= (data collect: [ :each| (each at:'FT_DATECREA') asDate  year  ]) asSet.
@@ -42,17 +53,24 @@ b
 ]
 
 { #category : #adding }
-CIMPBAnalylizer >> addTicketsWith:aDictionnary [
+CIMPBAnalyser >> addTicketsWith:aDictionnary [
 tickets add: (CIMTicket createWith:aDictionnary).
 ]
 
 { #category : #initialization }
-CIMPBAnalylizer >> initialize [
+CIMPBAnalyser >> initialize [
 	super initialize.
-	tickets := OrderedCollection new
+	tickets := OrderedCollection new.
+	(CSVParser parseFileWithHeader: 'ticketsCIM.csv')
+		do: [ :each | self addTicketsWith: each ]
 ]
 
 { #category : #acessing }
-CIMPBAnalylizer >> tickets [
+CIMPBAnalyser >> tickets [
 	^ tickets
+]
+
+{ #category : #accessing }
+CIMPBAnalyser >> tickets: anObject [
+	tickets := anObject
 ]

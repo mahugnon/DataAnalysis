@@ -6,7 +6,7 @@ Class {
 
 { #category : #'initailize-release' }
 CIMTicketPerYear class >> create [
-	^ self new tickets: CIMPBAnalylizer Tickets tickets
+	^ self new tickets: CIMPBAnalyser Tickets tickets
 ]
 
 { #category : #'initailize-release' }

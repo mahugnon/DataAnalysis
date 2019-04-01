@@ -12,7 +12,7 @@ Class {
 CIMQuery class >> create [
 	^ self new
 		tickets:
-			(CIMPBAnalylizer Tickets tickets
+			(CIMPBAnalyser Tickets tickets
 				select: [ :ticket | ticket priorite = self displayName ])
 ]
 
@@ -28,17 +28,17 @@ CIMQuery class >> displayName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CIMQuery >> biblioOccurenceUpperTo: aNumber [
 	^ self countBibliothequeOccurrence select: [ :each | each >= 1000 ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CIMQuery >> bibliotheques [
 	^ (tickets collect: [ :ticket | ticket biblioNom ]) asSet
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CIMQuery >> countBibliothequeOccurrence [
 	^ countBibliothequeOccurrence
 		ifNil: [ countBibliothequeOccurrence := Dictionary new.
