@@ -22,7 +22,12 @@ CIMQuery class >> displayName [
 ]
 
 { #category : #'as yet unclassified' }
-CIMQuery >> biblioteques [
+CIMQuery >> biblioOccurenceUpperTo: aNumber [
+	^ self countBibliothequeOccurrence select: [ :each | each >= 1000 ]
+]
+
+{ #category : #'as yet unclassified' }
+CIMQuery >> bibliotheques [
 	^ (tickets collect: [ :ticket | ticket biblioNom ]) asSet
 ]
 
@@ -30,7 +35,7 @@ CIMQuery >> biblioteques [
 CIMQuery >> countBibliothequeOccurrence [
 	^ countBibliothequeOccurrence
 		ifNil: [ countBibliothequeOccurrence := Dictionary new.
-			self biblioteques
+			self bibliotheques
 				do: [ :bib | 
 					countBibliothequeOccurrence
 						at: bib
