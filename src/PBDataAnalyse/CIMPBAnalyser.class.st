@@ -25,10 +25,8 @@ CIMPBAnalyser class >> new [
 
 { #category : #'instance creation' }
 CIMPBAnalyser class >> uniqueInstance [
-	"  UniqueInstance ifNil: [UniqueInstance := self basicNew initialize].
-       ^UniqueInstance"
-
-	^ UniqueInstance := self basicNew initialize
+	UniqueInstance ifNil: [ UniqueInstance := self basicNew initialize ].
+	^ UniqueInstance
 ]
 
 { #category : #utility }
