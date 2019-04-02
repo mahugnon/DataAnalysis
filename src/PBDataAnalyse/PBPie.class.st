@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #drawing }
-PBPie >> drawPie: associations [
+PBPie >> draw: associations [
 	| b |
 	b := RTPieBuilder new.
 	b interaction popup.

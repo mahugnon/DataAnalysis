@@ -1,5 +1,5 @@
 Class {
-	#name : #TestPBAnalyser,
+	#name : #TestPBQueries,
 	#superclass : #TestCase,
 	#instVars : [
 		'analyser'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #running }
-TestPBAnalyser >> setUp [
+TestPBQueries >> setUp [
 	super setUp.
 	analyser := CIMTicketBase new.
 	analyser
@@ -38,16 +38,11 @@ TestPBAnalyser >> setUp [
 ]
 
 { #category : #tests }
-TestPBAnalyser >> testTheFirstElementShouldBeImportantTicket [
-	| cIMimportant |
-	cIMimportant := CIMQueryImportant create: analyser tickets.
-	self assert: cIMimportant tickets size equals: 1.
+TestPBQueries >> testQueryImportant [
 	self
-		assert: cIMimportant tickets
-		equals: analyser tickets first asOrderedCollection
-]
-
-{ #category : #tests }
-TestPBAnalyser >> testTheyShouldBe3ticketFrom2004 [
-	self assert: (analyser ticketsFrom: 2004) size equals: 3
+		assert: (CIMQueryImportant new runOn: analyser tickets) size
+		equals: 1.
+	self
+		assert: (CIMQueryImportant new runOn: analyser tickets) anyOne ftDateCrea
+		equals: '2004-02-15' asDate
 ]

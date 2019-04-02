@@ -1,17 +1,22 @@
 Class {
 	#name : #CIMTicketPerYear,
-	#superclass : #CIMQuery,
+	#superclass : #CIMQueryOnTickets,
 	#category : #'PBDataAnalyse-Queries'
 }
 
 { #category : #'initailize-release' }
 CIMTicketPerYear class >> create [
-	^ self new tickets: CIMPBAnalyser Tickets tickets
+	^ self new tickets: CIMTicketBase Tickets tickets
 ]
 
 { #category : #'initailize-release' }
 CIMTicketPerYear class >> create: tickets [
 	^ self new tickets: tickets
+]
+
+{ #category : #running }
+CIMTicketPerYear >> runOn: aCollection [
+	^ aCollection groupedBy: [ :ticket | ticket year ]
 ]
 
 { #category : #'queries - methods' }
@@ -34,12 +39,6 @@ CIMTicketPerYear >> ticketsGroupByYear [
 	self years
 		do: [ :year | ticketsGroup at: year put: (self ticketsForYear: year) ].
 	^ ticketsGroup
-]
-
-{ #category : #'queries - methods' }
-CIMTicketPerYear >> ticketsGroupByYearFor: aBiblioNameString [
-	self ticketsGroupByYear
-		do: [ :each | each biblioNom = aBiblioNameString ]
 ]
 
 { #category : #'queries - methods' }

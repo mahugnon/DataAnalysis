@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMPBAnalyser,
+	#name : #CIMTicketBase,
 	#superclass : #Object,
 	#instVars : [
 		'tickets'
@@ -13,40 +13,30 @@ Class {
 	#category : #'PBDataAnalyse-Core'
 }
 
-{ #category : #accessing }
-CIMPBAnalyser class >> default [
-	^ self uniqueInstance
-]
-
-{ #category : #'instance creation' }
-CIMPBAnalyser class >> uniqueInstance [
-	UniqueInstance ifNil: [ UniqueInstance := self basicNew loadTickets ].
-	^ UniqueInstance
-]
-
 { #category : #adding }
-CIMPBAnalyser >> addTicketsWith:aDictionnary [
+CIMTicketBase >> addTicketsWith:aDictionnary [
 tickets add: (CIMTicket createWith:aDictionnary).
 ]
 
 { #category : #initialization }
-CIMPBAnalyser >> loadTickets [
+CIMTicketBase >> loadTickets [
 	tickets := OrderedCollection new.
 	(CSVParser parseFileWithHeader: 'ticketsCIM.csv')
-		do: [ :each | self addTicketsWith: each ]
+		do: [ :each | self addTicketsWith: each ].
+	^tickets
 ]
 
 { #category : #acessing }
-CIMPBAnalyser >> tickets [
+CIMTicketBase >> tickets [
 	^ tickets
 ]
 
 { #category : #accessing }
-CIMPBAnalyser >> tickets: anObject [
+CIMTicketBase >> tickets: anObject [
 	tickets := anObject
 ]
 
 { #category : #'as yet unclassified' }
-CIMPBAnalyser >> ticketsFrom: aYear [
+CIMTicketBase >> ticketsFrom: aYear [
 	^ tickets select: [ :ticket | ticket year >= aYear ]
 ]

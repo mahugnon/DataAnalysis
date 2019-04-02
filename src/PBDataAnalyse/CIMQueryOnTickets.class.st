@@ -1,5 +1,11 @@
+"
+Abstract class for queries that run on a collection of tickets and return a collection of tickets 
+
+It has only one method: 
+  runOn: aCollectionOfTickets
+"
 Class {
-	#name : #CIMQuery,
+	#name : #CIMQueryOnTickets,
 	#superclass : #Object,
 	#instVars : [
 		'tickets',
@@ -9,37 +15,37 @@ Class {
 }
 
 { #category : #'initailize-release' }
-CIMQuery class >> create [
+CIMQueryOnTickets class >> create [
 	^ self new
 		tickets:
-			(CIMPBAnalyser uniqueInstance  tickets
+			(CIMTicketBase uniqueInstance  tickets
 				select: [ :ticket | ticket priorite = self displayName ])
 ]
 
 { #category : #'initailize-release' }
-CIMQuery class >> create: tickets [
+CIMQueryOnTickets class >> create: tickets [
 	^ self new
 		tickets: (tickets select: [ :ticket | ticket priorite = self displayName ])
 ]
 
 { #category : #accessing }
-CIMQuery class >> displayName [
+CIMQueryOnTickets class >> displayName [
 	^ self subclassResponsibility
 ]
 
 { #category : #queries }
-CIMQuery >> biblioOccurenceUpperTo: aNumber [
+CIMQueryOnTickets >> biblioOccurenceUpperTo: aNumber [
 	^ self countBibliothequeOccurrence
 		select: [ :each | each >= aNumber ]
 ]
 
 { #category : #queries }
-CIMQuery >> bibliotheques [
+CIMQueryOnTickets >> bibliotheques [
 	^ (tickets collect: [ :ticket | ticket biblioNom ]) asSet
 ]
 
 { #category : #queries }
-CIMQuery >> countBibliothequeOccurrence [
+CIMQueryOnTickets >> countBibliothequeOccurrence [
 	countBibliothequeOccurrence
 		ifNotNil: [ ^ countBibliothequeOccurrence associations ].
 	countBibliothequeOccurrence := Dictionary new.
@@ -51,12 +57,17 @@ CIMQuery >> countBibliothequeOccurrence [
 	^ countBibliothequeOccurrence
 ]
 
+{ #category : #running }
+CIMQueryOnTickets >> runOn: aCollection [
+	self subclassResponsibility
+]
+
 { #category : #accessing }
-CIMQuery >> tickets [
+CIMQueryOnTickets >> tickets [
 	^ tickets
 ]
 
 { #category : #accessing }
-CIMQuery >> tickets: anObject [
+CIMQueryOnTickets >> tickets: anObject [
 	tickets := anObject
 ]

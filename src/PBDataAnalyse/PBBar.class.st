@@ -5,14 +5,14 @@ Class {
 }
 
 { #category : #'drawing-general' }
-PBBar >> draw: assications [
+PBBar >> draw: associations [
 	| b ds |
 	b := RTGrapher new.
 	ds := RTData new.
 	ds barShape color: Color blue.
-	ds points: assications.
+	ds points: associations.
 	ds
-		barChartWithBarTitle: [ :value | (assications keyAtValue: value) asString ].
+		barChartWithBarTitle: [ :value | (associations keyAtValue: value) asString ].
 	b add: ds.
 	b axisX
 		noLabel;
