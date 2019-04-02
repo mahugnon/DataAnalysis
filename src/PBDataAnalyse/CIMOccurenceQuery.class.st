@@ -4,18 +4,14 @@ Class {
 	#category : #'PBDataAnalyse-Queries'
 }
 
-{ #category : #queries }
-CIMOccurenceQuery >> biblioOccurenceUpperTo: aNumber [
-	^ self countBibliothequeOccurrence
-		select: [ :each | each >= aNumber ]
-]
-
 { #category : #'as yet unclassified' }
 CIMOccurenceQuery >> runOn: aTicketCollection bibliotheques: aCollection [
-	^ aCollection
-		inject: Dictionary new
-		into: [ :bib :dic | 
-			dic
+	| result |
+	result := Dictionary new.
+	aCollection
+		do: [ :bib | 
+			result
 				at: bib
-				put: (aTicketCollection count: [ :ticket | ticket biblioNom = bib ]) ]
+				put: (aTicketCollection count: [ :ticket | ticket biblioNom = bib ]) ].
+	^ result
 ]

@@ -14,14 +14,6 @@ Class {
 }
 
 { #category : #'initailize-release' }
-CIMQueryOnTickets class >> create [
-	^ self new
-		tickets:
-			(CIMTicketBase uniqueInstance  tickets
-				select: [ :ticket | ticket priorite = self displayName ])
-]
-
-{ #category : #'initailize-release' }
 CIMQueryOnTickets class >> create: tickets [
 	^ self new
 		tickets: (tickets select: [ :ticket | ticket priorite = self displayName ])

@@ -49,6 +49,16 @@ TestPBQueries >> testGetBibliotheques [
 		hasSameElements: #('B1' 'B2' 'B3')
 ]
 
+{ #category : #running }
+TestPBQueries >> testGroupBibliothequeByOccurence [
+	self
+		assert:
+			((CIMOccurenceQuery new
+				runOn: analyser tickets
+				bibliotheques: #('B1' 'B2' 'B3')) at: 'B1')
+		equals: 3
+]
+
 { #category : #tests }
 TestPBQueries >> testNumberOfUrgentPerYear [
 	| group |
