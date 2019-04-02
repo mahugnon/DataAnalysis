@@ -37,16 +37,6 @@ Bibliotheque >> numberOfTresImportantPerYear [
 ]
 
 { #category : #metrics }
-Bibliotheque >> numberOfUrgentPerYear [
-	| tickets cimUrgent bibTickets |
-	tickets := CIMTicketBase default ticketsFrom: 2003.
-	cimUrgent := CIMQueryUrgent create: tickets.
-	bibTickets := cimUrgent tickets
-		select: [ :ticket | ticket biblioNom = biblioNom ].
-	^ (CIMTicketPerYear create: bibTickets) ticketsCountPerYear
-]
-
-{ #category : #metrics }
 Bibliotheque >> numberOfUrgentPerYear: aTicketCollection [
 	^ (CIMTicketPerYear create: ((CIMQueryUrgent create: aTicketCollection) tickets)) ticketsCountPerYear
 ]

@@ -8,8 +8,7 @@ Class {
 	#name : #CIMQueryOnTickets,
 	#superclass : #Object,
 	#instVars : [
-		'tickets',
-		'countBibliothequeOccurrence'
+		'tickets'
 	],
 	#category : #'PBDataAnalyse-Queries'
 }
@@ -31,30 +30,6 @@ CIMQueryOnTickets class >> create: tickets [
 { #category : #accessing }
 CIMQueryOnTickets class >> displayName [
 	^ self subclassResponsibility
-]
-
-{ #category : #queries }
-CIMQueryOnTickets >> biblioOccurenceUpperTo: aNumber [
-	^ self countBibliothequeOccurrence
-		select: [ :each | each >= aNumber ]
-]
-
-{ #category : #queries }
-CIMQueryOnTickets >> bibliotheques [
-	^ (tickets collect: [ :ticket | ticket biblioNom ]) asSet
-]
-
-{ #category : #queries }
-CIMQueryOnTickets >> countBibliothequeOccurrence [
-	countBibliothequeOccurrence
-		ifNotNil: [ ^ countBibliothequeOccurrence associations ].
-	countBibliothequeOccurrence := Dictionary new.
-	self bibliotheques
-		do: [ :bib | 
-			countBibliothequeOccurrence
-				at: bib
-				put: (tickets count: [ :ticket | ticket biblioNom = bib ]) ].
-	^ countBibliothequeOccurrence
 ]
 
 { #category : #running }
