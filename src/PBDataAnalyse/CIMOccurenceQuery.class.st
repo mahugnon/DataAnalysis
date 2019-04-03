@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+CIMOccurenceQuery >> runOn: aTicketCollection [
+	^ self subclassResponsibility
+]
+
+{ #category : #'as yet unclassified' }
 CIMOccurenceQuery >> runOn: aTicketCollection bibliotheques: aCollection [
 	| result |
 	result := Dictionary new.
@@ -12,6 +17,6 @@ CIMOccurenceQuery >> runOn: aTicketCollection bibliotheques: aCollection [
 		do: [ :bib | 
 			result
 				at: bib
-				put: (aTicketCollection count: [ :ticket | ticket biblioNom = bib ]) ].
+				put: (aTicketCollection select: [ :ticket | ticket biblioNom = bib ]) size ].
 	^ result
 ]
