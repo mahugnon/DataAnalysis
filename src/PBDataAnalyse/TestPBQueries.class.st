@@ -18,28 +18,54 @@ TestPBQueries >> setUp [
 					(CIMTicket new
 						ftDateCrea: '2004-02-15' asDate;
 						priorite: 'IMPORTANT';
+						typCorrLibelle: 'EVOLUTION';
 						biblioNom: 'B1');
 				add:
 					(CIMTicket new
 						ftDateCrea: '2001-05-1' asDate;
 						priorite: 'TRES IMPORTANT';
+						typCorrLibelle: 'RUN/Evolution';
 						biblioNom: 'B2');
 				add:
 					(CIMTicket new
 						ftDateCrea: '2008-12-07' asDate;
 						priorite: 'URGENT';
+						typCorrLibelle: 'RUN/Anomalie';
 						biblioNom: 'B3');
 				add:
 					(CIMTicket new
 						ftDateCrea: '2009-12-07' asDate;
 						priorite: 'URGENT';
+						typCorrLibelle: 'Roadmap Editeur';
 						biblioNom: 'B1');
 				add:
 					(CIMTicket new
 						ftDateCrea: '2014-02-14' asDate;
 						priorite: 'CONFORT';
+						typCorrLibelle: 'Roadmap Projets Clients';
 						biblioNom: 'B1');
 				yourself)
+]
+
+{ #category : #running }
+TestPBQueries >> testCIMQueryCorrectiveMaintenance [
+	self
+		assert: (CIMQueryCorrectiveMaintenance new runOn: analyser tickets) size
+		equals: 1
+]
+
+{ #category : #running }
+TestPBQueries >> testCIMQueryEvolution [
+	self
+		assert:
+			(CIMQueryEvolution  new runOn: analyser tickets )
+				size
+		equals: 4
+]
+
+{ #category : #running }
+TestPBQueries >> testCIMQueryMisc [
+	self assert: (CIMQueryMisc new runOn: analyser tickets) isEmpty
 ]
 
 { #category : #tests }

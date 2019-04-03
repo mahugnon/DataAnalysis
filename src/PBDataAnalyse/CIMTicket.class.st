@@ -100,13 +100,24 @@ CIMTicket >> isCorrectiveMaintenace [
 ]
 
 { #category : #accessing }
+CIMTicket >> isEvolution [
+	^ self libelleForEvolution
+		anySatisfy: [ :lib | self typCorrLibelle beginsWith: lib ]
+]
+
+{ #category : #accessing }
+CIMTicket >> isMisc [
+	^ self isCorrectiveMaintenace not & self isEvolution not
+]
+
+{ #category : #accessing }
 CIMTicket >> libelleForCorrective [
-	^{'CORRECTION' . 'REGRESSION' . 'RUN/Anomalie' . 'ANOMALIE'}
+	^ {'CORRECTION' . 'REGRESSION' . 'RUN/Anomalie' . 'ANOMALIE'. }
 ]
 
 { #category : #accessing }
 CIMTicket >> libelleForEvolution [
-	^{'Evolution' . 'REGRESSION' . 'RUN/Anomalie' . 'ANOMALIE'}
+	^ {'EVOLUTION' . 'RUN/Evolution' . 'Roadmap'}
 ]
 
 { #category : #accessing }
