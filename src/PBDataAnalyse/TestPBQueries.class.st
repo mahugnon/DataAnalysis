@@ -55,6 +55,15 @@ TestPBQueries >> testCIMQueryCorrectiveMaintenance [
 ]
 
 { #category : #running }
+TestPBQueries >> testCIMQueryCorrectiveMaintenancePerYear [
+	self
+		assert:
+			(CIMQueryCorrectiveMaintenancePerYear new runOn: analyser tickets) associations anyOne key
+				 
+		equals: 2008 . 
+]
+
+{ #category : #running }
 TestPBQueries >> testCIMQueryEvolution [
 	self
 		assert:
@@ -102,13 +111,4 @@ TestPBQueries >> testQueryImportant [
 	self
 		assert: (CIMQueryImportant new runOn: analyser tickets) anyOne ftDateCrea
 		equals: '2004-02-15' asDate
-]
-
-{ #category : #running }
-TestPBQueries >> testTicketsForBibNamedB1ShouldBe3 [
-	self
-		assert:
-			(CIMQueryBibliotheque new runOn: analyser tickets bibliotheque: 'B1')
-				size
-		equals: 3
 ]

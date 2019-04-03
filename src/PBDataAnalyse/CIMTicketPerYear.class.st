@@ -4,16 +4,6 @@ Class {
 	#category : #'PBDataAnalyse-Queries'
 }
 
-{ #category : #'initailize-release' }
-CIMTicketPerYear class >> create [
-	^ self new tickets: CIMTicketBase Tickets tickets
-]
-
-{ #category : #'initailize-release' }
-CIMTicketPerYear class >> create: tickets [
-	^ self new tickets: tickets
-]
-
 { #category : #running }
 CIMTicketPerYear >> runOn: aCollection [
 	^ aCollection groupedBy: [ :ticket | ticket year ]

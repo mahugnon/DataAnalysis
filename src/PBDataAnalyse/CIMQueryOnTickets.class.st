@@ -7,17 +7,8 @@ It has only one method:
 Class {
 	#name : #CIMQueryOnTickets,
 	#superclass : #Object,
-	#instVars : [
-		'tickets'
-	],
 	#category : #'PBDataAnalyse-Queries'
 }
-
-{ #category : #'initailize-release' }
-CIMQueryOnTickets class >> create: tickets [
-	^ self new
-		tickets: (tickets select: [ :ticket | ticket priorite = self displayName ])
-]
 
 { #category : #accessing }
 CIMQueryOnTickets class >> displayName [
@@ -27,14 +18,4 @@ CIMQueryOnTickets class >> displayName [
 { #category : #running }
 CIMQueryOnTickets >> runOn: aCollection [
 	self subclassResponsibility
-]
-
-{ #category : #accessing }
-CIMQueryOnTickets >> tickets [
-	^ tickets
-]
-
-{ #category : #accessing }
-CIMQueryOnTickets >> tickets: anObject [
-	tickets := anObject
 ]

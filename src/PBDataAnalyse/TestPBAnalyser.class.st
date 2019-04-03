@@ -39,11 +39,11 @@ TestPBAnalyser >> setUp [
 
 { #category : #tests }
 TestPBAnalyser >> testTheFirstElementShouldBeImportantTicket [
-	| cIMimportant |
-	cIMimportant := CIMQueryImportant create: analyser tickets.
-	self assert: cIMimportant tickets size equals: 1.
 	self
-		assert: cIMimportant tickets
+		assert: (CIMQueryImportant new runOn: analyser tickets) size
+		equals: 1.
+	self
+		assert: (CIMQueryImportant new runOn: analyser tickets)
 		equals: analyser tickets first asOrderedCollection
 ]
 
