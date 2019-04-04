@@ -44,6 +44,12 @@ TestPBQueries >> setUp [
 						priorite: 'CONFORT';
 						typCorrLibelle: 'Roadmap Projets Clients';
 						biblioNom: 'B1');
+				add:
+					(CIMTicket new
+						ftDateCrea: '2015-09-07' asDate;
+						priorite: 'CONFORT';
+						typCorrLibelle: 'DIVERS';
+						biblioNom: 'B2');
 				yourself)
 ]
 
@@ -63,6 +69,13 @@ TestPBQueries >> testCIMQueryCorrectiveMaintenancePerYear [
 		equals: 2008 . 
 ]
 
+{ #category : #tests }
+TestPBQueries >> testCIMQueryCorrelationBugCorrectiveMisc [
+	self
+		assertCollection: (CIMQueryCorrelationBugCorrectiveMisc new runOn: analyser tickets)
+		hasSameElements: {'misc' -> 1. 'correction' -> 4 .'bugs' -> 1}
+]
+
 { #category : #running }
 TestPBQueries >> testCIMQueryEvolution [
 	self
@@ -74,7 +87,10 @@ TestPBQueries >> testCIMQueryEvolution [
 
 { #category : #running }
 TestPBQueries >> testCIMQueryMisc [
-	self assert: (CIMQueryMisc new runOn: analyser tickets) isEmpty
+	self deny: (CIMQueryMisc new runOn: analyser tickets) isEmpty.
+	self
+		assert: (CIMQueryMisc new runOn: analyser tickets) size
+		equals: 1
 ]
 
 { #category : #tests }
