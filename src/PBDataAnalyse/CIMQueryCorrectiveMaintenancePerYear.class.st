@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMQueryCorrectiveMaintenancePerYear,
-	#superclass : #CIMQueryBinaryOnTickets,
+	#superclass : #CIMQueryComposedOnTickets,
 	#category : #'PBDataAnalyse-Queries'
 }
 

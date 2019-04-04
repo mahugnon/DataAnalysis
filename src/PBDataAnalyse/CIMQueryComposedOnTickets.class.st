@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMQueryBinaryOnTickets,
+	#name : #CIMQueryComposedOnTickets,
 	#superclass : #CIMQueryOnTickets,
 	#category : #'PBDataAnalyse-Queries'
 }
