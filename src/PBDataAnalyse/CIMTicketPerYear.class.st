@@ -30,8 +30,3 @@ CIMTicketPerYear >> ticketsGroupByYear [
 		do: [ :year | ticketsGroup at: year put: (self ticketsForYear: year) ].
 	^ ticketsGroup
 ]
-
-{ #category : #'queries - methods' }
-CIMTicketPerYear >> years [
-	^ (tickets collect: [ :ticket | ticket ftDateCrea year ]) asSet
-]
