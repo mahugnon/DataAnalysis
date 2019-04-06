@@ -20,10 +20,15 @@ tickets add: (CIMTicket createWith:aDictionnary).
 
 { #category : #initialization }
 CIMTicketBase >> loadTickets [
+	^self loadTicketsFromFilename: 'ticketsCIM.csv'
+]
+
+{ #category : #initialization }
+CIMTicketBase >> loadTicketsFromFilename: aFileName [
 	tickets := OrderedCollection new.
-	(CSVParser parseFileWithHeader: 'ticketsCIM.csv')
+	(CSVParser parseFileWithHeader: aFileName)
 		do: [ :each | self addTicketsWith: each ].
-	^tickets
+	^ tickets
 ]
 
 { #category : #acessing }
