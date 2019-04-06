@@ -11,8 +11,7 @@ PBBar >> draw: associations [
 	ds := RTData new.
 	ds barShape color: Color blue.
 	ds points: associations.
-	ds
-		barChartWithBarTitle: [ :value | (associations keyAtValue: value) asString ].
+	ds barChartWithBarTitle: [ :value | (associations keyAtValue: value) asString ].
 	b add: ds.
 	b axisX
 		noLabel;

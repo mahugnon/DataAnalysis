@@ -6,7 +6,9 @@ Class {
 
 { #category : #running }
 CIMTicketPerYear >> runOn: aCollection [
-	^ aCollection groupedBy: [ :ticket | ticket year ]
+	| tmp |
+	tmp := (aCollection groupedBy: [ :ticket | ticket year ]).
+	^tmp associations sorted: [ :a :b | a key <= b key ]
 ]
 
 { #category : #'queries - methods' }
