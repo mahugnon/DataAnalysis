@@ -50,7 +50,12 @@ TestPBQueries >> setUp [
 						priorite: 'CONFORT';
 						typCorrLibelle: 'DIVERS';
 						biblioNom: 'B2');
-				yourself)
+				add:
+					(CIMTicket new
+						ftDateCrea: '2010-09-07' asDate;
+						priorite: 'CONFORT';
+						typCorrLibelle: 'Aucune';
+						biblioNom: 'B2') ;yourself)
 ]
 
 { #category : #running }
@@ -64,7 +69,7 @@ TestPBQueries >> testCIMQueryCorrectiveMaintenance [
 TestPBQueries >> testCIMQueryCorrectiveMaintenancePerYear [
 	self
 		assert:
-			(CIMQueryCorrectiveMaintenancePerYear new runOn: analyser tickets) associations anyOne key
+			(CIMQueryCorrectiveMaintenancePerYear new runOn: analyser tickets)anyOne  key
 				 
 		equals: 2008 . 
 ]
@@ -73,7 +78,7 @@ TestPBQueries >> testCIMQueryCorrectiveMaintenancePerYear [
 TestPBQueries >> testCIMQueryCorrelationBugCorrectiveMisc [
 	self
 		assertCollection: (CIMQueryCorrelationBugCorrectiveMisc new runOn: analyser tickets)
-		hasSameElements: {'misc' -> 1. 'correction' -> 4 .'bugs' -> 1}
+		hasSameElements: {'misc' -> 2. 'correction' -> 4 .'bugs' -> 1}
 ]
 
 { #category : #running }
@@ -90,7 +95,7 @@ TestPBQueries >> testCIMQueryMisc [
 	self deny: (CIMQueryMisc new runOn: analyser tickets) isEmpty.
 	self
 		assert: (CIMQueryMisc new runOn: analyser tickets) size
-		equals: 1
+		equals: 2
 ]
 
 { #category : #tests }
@@ -116,7 +121,7 @@ TestPBQueries >> testNumberOfUrgentPerYear [
 	group := CIMTicketPerYear new
 		runOn: (CIMQueryUrgent new runOn: analyser tickets).
 	self assert: group size equals: 2.
-	self assert: (group values flatten includes: analyser tickets third)
+	self assert: ((group collect:[:each| each value]) flatten includes: analyser tickets third)
 ]
 
 { #category : #tests }
