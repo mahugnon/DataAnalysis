@@ -18,6 +18,34 @@ CIMTicketBase >> addTicketsWith:aDictionnary [
 tickets add: (CIMTicket createWith:aDictionnary).
 ]
 
+{ #category : #'as yet unclassified' }
+CIMTicketBase >> bibliothequesWithManyTickets [
+	^ ((self tickets collect: #biblioNom) asBag sortedCounts select: [ :a | a key > 1000 ])
+		collect: #value
+]
+
+{ #category : #'as yet unclassified' }
+CIMTicketBase >> evolutionCorrectionPerYearForBibliotheque: aBiblioName [
+	| graph ticketsBiblio roassal |
+	ticketsBiblio := CIMQueryBibliotheque new
+		queryName: aBiblioName;
+		runOn: self tickets.
+	graph := PB2Bars new.
+	graph
+		data1:
+			((CIMTicketPerYear new runOn: (CIMQueryCorrectiveMaintenance new runOn: ticketsBiblio))
+				collect: [ :ass | ass key -> ass value size ]) asOrderedDictionary.
+	graph
+		data2:
+			((CIMTicketPerYear new runOn: (CIMQueryEvolution new runOn: ticketsBiblio))
+				collect: [ :ass | ass key -> ass value size ]) asOrderedDictionary.
+	roassal := graph draw.
+	roassal title: aBiblioName.
+	roassal axisY noDecimal.
+	roassal open.
+	^ roassal
+]
+
 { #category : #initialization }
 CIMTicketBase >> loadTickets [
 	^self loadTicketsFromFilename: 'ticketsCIM.csv'

@@ -45,10 +45,10 @@ PB2Bars >> draw [
 	ds y: [ :year | data2 at: year ].
 	b add: ds.
 	b axisX
-		numberOfLabels: (data1 size max: data2 size) ;
-		labelRotation: -45 ;
+		numberOfLabels: (data1 size max: data2 size);
+		labelRotation: -45;
 		labelConversion: [ :v | 
-			v < 1
+			(v < 1 or: [ v > data1 keys size ])
 				ifTrue: [ ''	"for 0" ]
 				ifFalse: [ (data1 keys at: v) asString ] ].
 	^ b

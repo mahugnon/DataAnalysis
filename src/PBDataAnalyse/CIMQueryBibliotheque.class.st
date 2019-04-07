@@ -19,5 +19,5 @@ CIMQueryBibliotheque >> queryName: anObject [
 
 { #category : #'as yet unclassified' }
 CIMQueryBibliotheque >> runOn: aTicketCollection [
-	^ (aTicketCollection select: [ :ticket | ticket biblioNom = queryName ])
+	^ aTicketCollection select: [ :ticket | ticket biblioNom asLowercase = queryName asLowercase ]
 ]
