@@ -30,7 +30,8 @@ CIMTicketBase >> evolutionCorrectionPerYearForBibliotheque: aBiblioName [
 	ticketsBiblio := CIMQueryBibliotheque new
 		queryName: aBiblioName;
 		runOn: self tickets.
-	graph := PB2Bars new.
+	graph := PBGraphEvolutiveCorrective new.
+	graph maxY: 400.
 	graph
 		data1:
 			((CIMTicketPerYear new runOn: (CIMQueryCorrectiveMaintenance new runOn: ticketsBiblio))
