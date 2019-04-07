@@ -9,14 +9,15 @@ Class {
 
 { #category : #running }
 CIMGroupQueryTopRecurentBibliotheque >> runOn: aCollection [
-	^ (((CIMTicketPerYear new runOn: aCollection)
+	^ ((((CIMTicketPerYear new
+		runOn: (CIMQueryCorrectiveMaintenance new runOn: aCollection))
 		collect: [ :each | 
 			CIMBibiothequeOccurenceQuery new
-				runOn: (CIMGroupTicketsByBiblioName new runOn: each) ])
+				runOn: (CIMGroupTicketsByBiblioName new runOn: each value) ])
 		collect: [ :each | 
 			each size > treshold
 				ifTrue: [ each copyFrom: 1 to: treshold ]
-				ifFalse: [ each ] ]) flatten keys asSet
+				ifFalse: [ each ] ]) flatten collect: [ :each| each key ] ) asSet
 ]
 
 { #category : #accessing }
