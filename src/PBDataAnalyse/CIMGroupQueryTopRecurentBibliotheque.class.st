@@ -17,7 +17,7 @@ CIMGroupQueryTopRecurentBibliotheque >> runOn: aCollection [
 		collect: [ :each | 
 			each size > treshold
 				ifTrue: [ each copyFrom: 1 to: treshold ]
-				ifFalse: [ each ] ]) flatten collect: [ :each| each key ] ) asSet
+				ifFalse: [ each ] ]) flatten collect: [ :each | each key ]) asSet
 ]
 
 { #category : #accessing }
