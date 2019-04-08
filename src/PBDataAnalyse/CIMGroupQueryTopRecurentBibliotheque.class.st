@@ -1,3 +1,11 @@
+"
+-I get bugs
+- sort them per year
+- I group them  per biblioNom for each year
+- I compute the occurence of each biblio
+- I select the treshold  first 
+- I miss them and remove repetition 
+"
 Class {
 	#name : #CIMGroupQueryTopRecurentBibliotheque,
 	#superclass : #CIMGroupTickets,

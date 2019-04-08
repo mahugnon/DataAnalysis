@@ -58,6 +58,15 @@ TestPBQueries >> setUp [
 						biblioNom: 'B2') ;yourself)
 ]
 
+{ #category : #tests }
+TestPBQueries >> testCIMGroupQueryTopRecurentBibliotheque [
+	self
+		assert:
+			((CIMGroupQueryTopRecurentBibliotheque new treshold: 2)
+				runOn: analyser tickets) anyOne
+		equals: 'B3'
+]
+
 { #category : #running }
 TestPBQueries >> testCIMQueryCorrectiveMaintenance [
 	self
