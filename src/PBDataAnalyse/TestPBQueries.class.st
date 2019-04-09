@@ -108,10 +108,13 @@ TestPBQueries >> testCIMQueryMisc [
 ]
 
 { #category : #tests }
-TestPBQueries >> testGetBibliotheques [
+TestPBQueries >> testGetBibliothequesMostOccurentBetweenBugAndEvolutionPerYear [
 	self
-		assertCollection: (CIMQueryBibliotheque new runOn: analyser tickets)
-		hasSameElements: #('B1' 'B2' 'B3')
+		assertCollection:
+			(CIMQueryMostOccurentEventPerYearForBibliotheque new
+				runOn: analyser tickets
+				with: 'B1')
+		hasSameElements: {2004 -> 'Evolution'. 2009 -> 'Evolution'. 2014 -> 'Evolution'}
 ]
 
 { #category : #running }

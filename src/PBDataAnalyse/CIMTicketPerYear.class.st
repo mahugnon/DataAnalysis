@@ -20,11 +20,6 @@ CIMTicketPerYear >> ticketsCountPerYear [
 ]
 
 { #category : #'queries - methods' }
-CIMTicketPerYear >> ticketsForYear: aYear [
-	^ tickets select: [ :ticket | ticket ftDateCrea year = aYear ]
-]
-
-{ #category : #'queries - methods' }
 CIMTicketPerYear >> ticketsGroupByYear [
 	| ticketsGroup |
 	ticketsGroup := Dictionary new.
