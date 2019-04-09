@@ -5,15 +5,24 @@ Class {
 }
 
 { #category : #api }
-CIMEvolutionRankStrategy >> rankWith: aCollection1 and: aCollection2 [
-	^ aCollection1 keys
+CIMEvolutionRankStrategy >> rankWith: evolutions and: bugs [
+	^ evolutions keys
 		collect: [ :key | 
 			| ev bg |
-			bg := aCollection2 at: key ifAbsent: [ 0 ].
-			ev := aCollection1 at: key.
+			bg := bugs at: key ifAbsent: [ 0 ].
+			ev := evolutions at: key.
 			ev = bg
-				ifTrue: [ key -> 'Neutre' ]
+				ifTrue: [ key
+						->
+							('Neutre bugs: ' , (bugs at: key) asString , ' ev:'
+								, (evolutions at: key)) ]
 				ifFalse: [ ev > bg
-						ifTrue: [ key -> 'Evolution' ]
-						ifFalse: [ key -> 'Bug' ] ] ]
+						ifTrue: [ key
+								->
+									('Evolution bugs: ' , (bugs at: key) asString , ' ev: '
+										, (evolutions at: key)) ]
+						ifFalse: [ key
+								->
+									('Bug bugs:' , (bugs at: key) asString , ' ev: '
+										, (evolutions at: key)) ] ] ]
 ]

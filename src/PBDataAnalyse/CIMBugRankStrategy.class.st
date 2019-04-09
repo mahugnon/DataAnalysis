@@ -5,15 +5,24 @@ Class {
 }
 
 { #category : #api }
-CIMBugRankStrategy >> rankWith: aCollection1 and: aCollection2 [
-	^ aCollection1 keys
+CIMBugRankStrategy >> rankWith: bugs and: evolutions [
+	^ bugs keys
 		collect: [ :key | 
 			| ev bg |
-			ev := aCollection2 at: key ifAbsent: [ 0 ].
-			bg := aCollection1 at: key.
+			ev := evolutions at: key ifAbsent: [ 0 ].
+			bg := bugs at: key.
 			ev = bg
-				ifTrue: [ key -> 'Neutre' ]
+				ifTrue: [ key
+						->
+							('Neutre bugs: ' , (bugs at: key) asString , ' ev:'
+								, (evolutions at: key) asString) ]
 				ifFalse: [ ev > bg
-						ifTrue: [ key -> 'Evolution' ]
-						ifFalse: [ key -> 'Bug' ] ] ]
+						ifTrue: [ key
+								->
+									('Evolution bugs: ' , (bugs at: key) asString , ' ev: '
+										, (evolutions at: key) asString) ]
+						ifFalse: [ key
+								->
+									('Bug bugs:' , (bugs at: key) asString , '  ev: '
+										, (evolutions at: key) asString) ] ] ]
 ]
