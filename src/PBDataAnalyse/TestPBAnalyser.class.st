@@ -38,16 +38,6 @@ TestPBAnalyser >> setUp [
 ]
 
 { #category : #tests }
-TestPBAnalyser >> testTheFirstElementShouldBeImportantTicket [
-	self
-		assert: (CIMQueryImportant new runOn: analyser tickets) size
-		equals: 1.
-	self
-		assert: (CIMQueryImportant new runOn: analyser tickets)
-		equals: analyser tickets first asOrderedCollection
-]
-
-{ #category : #tests }
 TestPBAnalyser >> testTheyShouldBe3ticketFrom2004 [
 	self assert: (analyser ticketsFrom: 2004) size equals: 3
 ]

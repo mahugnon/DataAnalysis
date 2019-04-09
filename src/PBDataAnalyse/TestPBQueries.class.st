@@ -126,22 +126,3 @@ TestPBQueries >> testGroupBibliothequeByOccurence [
 				bibliotheques: #('B1' 'B2' 'B3')) at: 'B1')
 		equals: 3
 ]
-
-{ #category : #tests }
-TestPBQueries >> testNumberOfUrgentPerYear [
-	| group |
-	group := CIMTicketPerYear new
-		runOn: (CIMQueryUrgent new runOn: analyser tickets).
-	self assert: group size equals: 2.
-	self assert: ((group collect:[:each| each value]) flatten includes: analyser tickets third)
-]
-
-{ #category : #tests }
-TestPBQueries >> testQueryImportant [
-	self
-		assert: (CIMQueryImportant new runOn: analyser tickets) size
-		equals: 1.
-	self
-		assert: (CIMQueryImportant new runOn: analyser tickets) anyOne ftDateCrea
-		equals: '2004-02-15' asDate
-]
