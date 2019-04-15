@@ -1,5 +1,5 @@
 Class {
-	#name : #PBGraphEvolutiveCorrective,
+	#name : #PB2GraphsBlueRed,
 	#superclass : #Object,
 	#instVars : [
 		'data1',
@@ -10,27 +10,27 @@ Class {
 }
 
 { #category : #accessing }
-PBGraphEvolutiveCorrective >> data1 [
+PB2GraphsBlueRed >> data1 [
 	^ data1
 ]
 
 { #category : #accessing }
-PBGraphEvolutiveCorrective >> data1: anObject [
+PB2GraphsBlueRed >> data1: anObject [
 	data1 := anObject
 ]
 
 { #category : #accessing }
-PBGraphEvolutiveCorrective >> data2 [
+PB2GraphsBlueRed >> data2 [
 	^ data2
 ]
 
 { #category : #accessing }
-PBGraphEvolutiveCorrective >> data2: anObject [
+PB2GraphsBlueRed >> data2: anObject [
 	data2 := anObject
 ]
 
 { #category : #'drawing-general' }
-PBGraphEvolutiveCorrective >> draw [
+PB2GraphsBlueRed >> draw [
 	| b ds |
 	b := RTGrapher new.
 	ds := RTData new.
@@ -58,6 +58,6 @@ PBGraphEvolutiveCorrective >> draw [
 ]
 
 { #category : #accessing }
-PBGraphEvolutiveCorrective >> maxY: aNumber [
+PB2GraphsBlueRed >> maxY: aNumber [
 	maxY := aNumber
 ]

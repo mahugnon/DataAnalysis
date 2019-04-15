@@ -30,15 +30,17 @@ CIMTicketBase >> evolutionCorrectionPerYearForBibliotheque: aBiblioName [
 	ticketsBiblio := CIMQueryBibliotheque new
 		queryName: aBiblioName;
 		runOn: self tickets.
-	graph := PBGraphEvolutiveCorrective new.
+	graph := PB2GraphsBlueRed new.
 	graph maxY: 400.
 	graph
 		data1:
-			((CIMTicketPerYear new runOn: (CIMQueryCorrectiveMaintenance new runOn: ticketsBiblio))
+			((CIMTicketPerYear new
+				runOn: (CIMQueryEvolution new runOn: ticketsBiblio))
 				collect: [ :ass | ass key -> ass value size ]) asOrderedDictionary.
 	graph
 		data2:
-			((CIMTicketPerYear new runOn: (CIMQueryEvolution new runOn: ticketsBiblio))
+			((CIMTicketPerYear new
+				runOn: (CIMQueryCorrectiveMaintenance new runOn: ticketsBiblio))
 				collect: [ :ass | ass key -> ass value size ]) asOrderedDictionary.
 	roassal := graph draw.
 	roassal title: aBiblioName.
