@@ -39,14 +39,15 @@ PB2GraphsBlueRed >> draw [
 	ds points: data1 keys.
 	ds y: [ :year | data1 at: year ].
 	b add: ds.
-	maxY ifNotNil: [b maxY: maxY].
+	maxY ifNotNil: [ b maxY: maxY ].
 	ds := RTData new.
 	"ds barShape color: Color red."
 	ds connectColor: Color red.
 	ds points: data2 keys.
 	ds y: [ :year | data2 at: year ].
 	b add: ds.
-	maxY ifNotNil: [b maxY: maxY].
+	maxY ifNotNil: [ b maxY: maxY ].
+	b maxX: (data1 size max: data2 size).
 	b axisX
 		numberOfLabels: (data1 size max: data2 size);
 		labelRotation: -45;
@@ -55,6 +56,31 @@ PB2GraphsBlueRed >> draw [
 				ifTrue: [ ''	"for 0" ]
 				ifFalse: [ (data1 keys at: v) asString ] ].
 	^ b
+]
+
+{ #category : #'as yet unclassified' }
+PB2GraphsBlueRed >> exportData [
+	| stream years |
+	years := data1 size >= data2 size
+		ifTrue: [ data1 keys ]
+		ifFalse: [ data2 keys ].
+	stream := FileStream forceNewFileNamed: 'data.csv'.
+	stream
+		nextPutAll: 'years';
+		nextPut: $,;
+		nextPutAll: 'evolution';
+		nextPut: $,;
+		nextPutAll: 'corretion';
+		nextPut: Character cr.
+	years
+		do: [ :year | 
+			stream
+				nextPutAll: year asString;
+				nextPut: $,;
+				nextPutAll: (data1 at: year ifAbsent: [ 0 ]) asString;
+				nextPut: $,;
+				nextPutAll: (data2 at: year ifAbsent: [ 0 ]) asString;
+				nextPut: Character cr ]
 ]
 
 { #category : #accessing }
