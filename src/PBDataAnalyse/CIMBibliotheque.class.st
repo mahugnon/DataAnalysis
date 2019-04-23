@@ -11,6 +11,13 @@ Class {
 	#category : #'PBDataAnalyse-model'
 }
 
+{ #category : #'as yet unclassified' }
+CIMBibliotheque >> drawEvolutionBugGraph [
+	^ EvolutionBugPresenter new
+		drawEvolutionCorrectionPerYearForTickets: tickets
+		title: nom
+]
+
 { #category : #accessing }
 CIMBibliotheque >> loc [
 	^ loc

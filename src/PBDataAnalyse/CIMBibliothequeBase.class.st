@@ -7,12 +7,12 @@ Class {
 	#category : #'PBDataAnalyse-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> addBibiothequeWith: aDictionary [
 	bibliotheques add: (CIMBibliotheque new updateWith: aDictionary)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> createBibliothequesIn: aFolder from: aTicketCollection [
 	bibliotheques := ((self loadBiothequesFromNamesFolder: aFolder)
 		collect: [ :each | 
@@ -25,6 +25,12 @@ CIMBibliothequeBase >> createBibliothequesIn: aFolder from: aTicketCollection [
 				yourself ]) asOrderedCollection
 ]
 
+{ #category : #utilities }
+CIMBibliothequeBase >> drawEvolutionBugGraph [
+bibliotheques ifEmpty: [ ^self ].
+bibliotheques do: [ :each| each drawEvolutionBugGraph ]
+]
+
 { #category : #initialization }
 CIMBibliothequeBase >> initialize [
 	super initialize.
@@ -32,13 +38,13 @@ CIMBibliothequeBase >> initialize [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> loadBiothequesFromFilename: aFileName [
 	(self loadCSV: aFileName)
 		do: [ :each | self addBibiothequeWith: each ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> loadBiothequesFromNamesFolder: aFolder [
 	^ aFolder asFileReference visibleFiles
 		collect: [ :aFile | 
@@ -83,7 +89,7 @@ CIMBibliothequeBase >> printOn: aFileReference [
 		ifNotEmpty: [ bibliotheques do: [ :each | each printOn: aStream ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> saveBibliothqueNames: aCollection in: aPath [
 	| stream |
 	stream := aPath asFileReference.
@@ -96,14 +102,14 @@ CIMBibliothequeBase >> saveBibliothqueNames: aCollection in: aPath [
 					aStream nextPut: Character cr ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> searchBiblioNamed: aString [
 	^ (bibliotheques
 		select: [ :bibotheque | bibotheque nom asLowercase = aString asLowercase ])
 		anyOne
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> updateBiblioNamed: aString bug: aNumber1 evolution: aNumber2 [
 	| biblio |
 	biblio := self searchBiblioNamed: aString.
