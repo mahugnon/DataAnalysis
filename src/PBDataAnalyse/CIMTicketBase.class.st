@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMTicketBase,
-	#superclass : #Object,
+	#superclass : #CIMBase,
 	#instVars : [
 		'tickets'
 	],
@@ -38,7 +38,7 @@ CIMTicketBase >> evolutionCorrectionPerYearForBibliotheque: aBiblioName [
 CIMTicketBase >> evolutionCorrectionPerYearForTickets: aTicketCollection title: aString [
 	| graph roassal |
 	graph := PB2GraphsBlueRed new.
-	graph maxY: 700.
+	graph maxY: 400.
 	graph
 		data1:
 			((CIMTicketPerYear new
@@ -65,7 +65,7 @@ CIMTicketBase >> loadTickets [
 { #category : #initialization }
 CIMTicketBase >> loadTicketsFromFilename: aFileName [
 	tickets := OrderedCollection new.
-	(CSVParser parseFileWithHeader: aFileName)
+	(self loadCSV: aFileName)
 		do: [ :each | self addTicketsWith: each ].
 	^ tickets
 ]

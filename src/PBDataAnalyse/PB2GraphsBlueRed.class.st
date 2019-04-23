@@ -39,6 +39,8 @@ PB2GraphsBlueRed >> draw [
 	ds points: data1 keys.
 	ds y: [ :year | data1 at: year ].
 	b add: ds.
+	b minX: 2003.
+	b maxX: 2019.
 	maxY ifNotNil: [ b maxY: maxY ].
 	ds := RTData new.
 	"ds barShape color: Color red."

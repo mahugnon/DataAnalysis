@@ -6,7 +6,9 @@ Class {
 
 { #category : #removing }
 CIMQueryBibliothequeNameRegexp >> rejectFrom: aCollection metchesRegex: aString [
-	^ aCollection reject: [ :ticket | ticket biblioNom  matchesRegex: aString ]
+	^ aCollection
+		reject:
+			[ :ticket | ticket biblioNom asLowercase matchesRegex: aString ]
 ]
 
 { #category : #running }
@@ -16,16 +18,26 @@ CIMQueryBibliothequeNameRegexp >> runOn: aCollection [
 
 { #category : #running }
 CIMQueryBibliothequeNameRegexp >> runOn: aCollection keyword: aString [
+"I take regex string"
 	^ aCollection
 		select: [ :ticket | ticket biblioNom asLowercase matchesRegex: aString ]
 ]
 
 { #category : #running }
 CIMQueryBibliothequeNameRegexp >> runOn: aCollection keyword: aString reject: keywordCollection [
+"I take regex String"
 	| tickets |
 	tickets := self runOn: aCollection keyword: aString.
 	keywordCollection
 		do:
 			[ :keyword | tickets := self rejectFrom: tickets metchesRegex: keyword ].
 	^ tickets
+]
+
+{ #category : #'as yet unclassified' }
+CIMQueryBibliothequeNameRegexp >> runOn: aTicketCollection names: aStringCollection [
+	^ (aStringCollection
+		collectAsSet:
+			[ :bibNom | aTicketCollection select: [ :ticket | ticket biblioNom = bibNom ] ])
+		flatten asSet
 ]
