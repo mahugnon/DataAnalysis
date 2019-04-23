@@ -33,11 +33,3 @@ CIMQueryBibliothequeNameRegexp >> runOn: aCollection keyword: aString reject: ke
 			[ :keyword | tickets := self rejectFrom: tickets metchesRegex: keyword ].
 	^ tickets
 ]
-
-{ #category : #'as yet unclassified' }
-CIMQueryBibliothequeNameRegexp >> runOn: aTicketCollection names: aStringCollection [
-	^ (aStringCollection
-		collectAsSet:
-			[ :bibNom | aTicketCollection select: [ :ticket | ticket biblioNom = bibNom ] ])
-		flatten asSet
-]

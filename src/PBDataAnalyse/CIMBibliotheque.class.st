@@ -5,7 +5,8 @@ Class {
 		'nom',
 		'loc',
 		'numberOfBug',
-		'numberOfEvolution'
+		'numberOfEvolution',
+		'tickets'
 	],
 	#category : #'PBDataAnalyse-model'
 }
@@ -53,7 +54,7 @@ CIMBibliotheque >> numberOfEvolution: anObject [
 { #category : #printing }
 CIMBibliotheque >> printOn: aStream [
 	^ aStream
-		
+		setToEnd;
 		nextPutAll: nom;
 		nextPut: $,;
 		nextPutAll: loc asString;
@@ -62,7 +63,16 @@ CIMBibliotheque >> printOn: aStream [
 		nextPut: $,;
 		nextPutAll: numberOfEvolution asString;
 		nextPut: Character cr
-		
+]
+
+{ #category : #accessing }
+CIMBibliotheque >> tickets [
+	^ tickets
+]
+
+{ #category : #accessing }
+CIMBibliotheque >> tickets: aCollection [
+	tickets := aCollection
 ]
 
 { #category : #api }
