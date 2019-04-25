@@ -12,6 +12,11 @@ CIMBibliothequeBase >> addBibiothequeWith: aDictionary [
 	bibliotheques add: (CIMBibliotheque new updateWith: aDictionary)
 ]
 
+{ #category : #acccessing }
+CIMBibliothequeBase >> bibliotheques [
+	^ bibliotheques
+]
+
 { #category : #utilities }
 CIMBibliothequeBase >> createBibliothequesIn: aFolder from: aTicketCollection [
 	bibliotheques := ((self loadBiothequesFromNamesFolder: aFolder)

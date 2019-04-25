@@ -19,7 +19,7 @@ EvolutionBugPresenter >> drawEvolutionCorrectionPerYearForTickets: aTicketCollec
 			((CIMTicketPerYear new
 				runOn: (CIMQueryCorrectiveMaintenance new runOn: aTicketCollection))
 				collect: [ :ass | ass key -> ass value size ]) asOrderedDictionary.
-	graph exportData.
+	graph exportData:aString,'.csv'.
 	roassal := graph draw.
 	roassal axisY noDecimal.
 	roassal title: aString.

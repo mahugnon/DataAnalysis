@@ -120,6 +120,11 @@ CIMTicket >> libelleForEvolution [
 	^ {'EVOLUTION' . 'RUN/Evolution' . 'Roadmap'}
 ]
 
+{ #category : #'public - layout' }
+CIMTicket >> month [
+^ftDateCrea month
+]
+
 { #category : #accessing }
 CIMTicket >> priorite [
 	^ priorite

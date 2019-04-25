@@ -10,20 +10,3 @@ CIMTicketPerYear >> runOn: aCollection [
 	tmp := (aCollection groupedBy: [ :ticket | ticket year ]).
 	^tmp associations sorted: [ :a :b | a key <= b key ]
 ]
-
-{ #category : #'queries - methods' }
-CIMTicketPerYear >> ticketsCountPerYear [
-	| ticketsGroup |
-	ticketsGroup := self ticketsGroupByYear.
-	^ ticketsGroup
-		keysDo: [ :year | ticketsGroup at: year put: (ticketsGroup at: year)size ]
-]
-
-{ #category : #'queries - methods' }
-CIMTicketPerYear >> ticketsGroupByYear [
-	| ticketsGroup |
-	ticketsGroup := Dictionary new.
-	self years
-		do: [ :year | ticketsGroup at: year put: (self ticketsForYear: year) ].
-	^ ticketsGroup
-]

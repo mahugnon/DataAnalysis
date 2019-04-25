@@ -60,13 +60,13 @@ PB2GraphsBlueRed >> draw [
 	^ b
 ]
 
-{ #category : #'as yet unclassified' }
-PB2GraphsBlueRed >> exportData [
+{ #category : #accessing }
+PB2GraphsBlueRed >> exportData: aFileReference [
 	| stream years |
 	years := data1 size >= data2 size
 		ifTrue: [ data1 keys ]
 		ifFalse: [ data2 keys ].
-	stream := FileStream forceNewFileNamed: 'data.csv'.
+	stream := aFileReference asFileReference writeStream.
 	stream
 		nextPutAll: 'years';
 		nextPut: $,;
@@ -77,6 +77,7 @@ PB2GraphsBlueRed >> exportData [
 	years
 		do: [ :year | 
 			stream
+				setToEnd;
 				nextPutAll: year asString;
 				nextPut: $,;
 				nextPutAll: (data1 at: year ifAbsent: [ 0 ]) asString;
