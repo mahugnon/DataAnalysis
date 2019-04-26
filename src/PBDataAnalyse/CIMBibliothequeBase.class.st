@@ -71,7 +71,8 @@ CIMBibliothequeBase >> mergeBaseWith: aBibBase1 [
 			aBib loc: aBibBase1Bib loc.
 			aBib
 				numberOfBug: (CIMQueryCorrectiveMaintenance new runOn: aBib tickets) size;
-				numberOfEvolution: (CIMQueryEvolution new runOn: aBib tickets) size ]
+				numberOfEvolution: (CIMQueryEvolution new runOn: aBib tickets) size ].
+	self sort
 ]
 
 { #category : #printing }
@@ -112,6 +113,11 @@ CIMBibliothequeBase >> searchBiblioNamed: aString [
 	^ (bibliotheques
 		select: [ :bibotheque | bibotheque nom asLowercase = aString asLowercase ])
 		anyOne
+]
+
+{ #category : #sorting }
+CIMBibliothequeBase >> sort [
+	self bibliotheques sort: [ :a :b | a nom < b nom ]
 ]
 
 { #category : #utilities }

@@ -32,12 +32,11 @@ CIMResultGenerator >> generateMonthTimeSerie [
 			EvolutionCorrection new
 				evolution:
 					(CIMTicketPerMonth new
-						runOn: (CIMQueryEvolution new runOn: each tickets)) asDictionary;
+						runOn: (CIMQueryEvolution new runOn: each tickets));
 				correction:
 					(CIMTicketPerMonth new
-						runOn: (CIMQueryCorrectiveMaintenance new runOn: each tickets))
-						asDictionary;
-				printOn: timeSerielocation / (each nom , '.csv')]
+						runOn: (CIMQueryCorrectiveMaintenance new runOn: each tickets));
+				printOn: timeSerielocation / (each nom , '.csv') ]
 ]
 
 { #category : #'as yet unclassified' }
