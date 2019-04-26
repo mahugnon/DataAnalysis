@@ -9,18 +9,22 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CIMResultGenerator >> ensureTimeSerieDirectoryCreation [
-	^ (self repoPath / 'CSVFiles/timeSeries')
-		ensureCreateDirectory
-]
-
-{ #category : #'as yet unclassified' }
-CIMResultGenerator >> generateEverything [
+CIMResultGenerator >> buildEverything [
 	self loadData.
 	bibliothequeBase
 		printOn: self repoPath / 'CSVFiles/bib_loc_ev_bug.csv'.
 	self generateMonthTimeSerie.
 	bibliothequeBase drawEvolutionBugGraph .
+]
+
+{ #category : #'as yet unclassified' }
+CIMResultGenerator >> ensureTimeSerieDirectoryCreation [
+	^ (self repoPath
+		/
+			(String
+				streamContents: [ :aStream | 
+					'CSVFiles/timeSeries' printOn: aStream.
+					Date today ddmmyyyy printOn: aStream ])) ensureCreateDirectory
 ]
 
 { #category : #'as yet unclassified' }
@@ -36,7 +40,13 @@ CIMResultGenerator >> generateMonthTimeSerie [
 				correction:
 					(CIMTicketPerMonth new
 						runOn: (CIMQueryCorrectiveMaintenance new runOn: each tickets));
-				printOn: timeSerielocation / (each nom , '.csv') ]
+				printOn:
+					timeSerielocation
+						/
+							(String
+								streamContents: [ :aStream | 
+									each nom printOn: aStream.
+									'.csv' printOn: aStream ]) ]
 ]
 
 { #category : #'as yet unclassified' }

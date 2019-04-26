@@ -14,7 +14,7 @@ CIMTicketPerMonth >> fileMonthGap: ticketsPerMonth [
 CIMTicketPerMonth >> runOn: aCollection [
 	| ticketsPerMonth |
 	ticketsPerMonth := aCollection groupedBy: [ :ticket | ticket month ].
-	self fileMonthGap: ticketsPerMonth.
+	ticketsPerMonth ifNotEmpty: [ self fileMonthGap: ticketsPerMonth ].
 	^ (ticketsPerMonth associations sorted: [ :a :b | a key <= b key ])
 		asOrderedDictionary
 ]
