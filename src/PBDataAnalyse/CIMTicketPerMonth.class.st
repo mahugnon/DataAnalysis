@@ -5,10 +5,18 @@ Class {
 }
 
 { #category : #running }
+CIMTicketPerMonth >> fileMonthGap: ticketsPerMonth [
+	(ticketsPerMonth keys min to: ticketsPerMonth keys max)
+		monthsDo: [ :each | ticketsPerMonth at: each ifAbsentPut: Set new ]
+]
+
+{ #category : #running }
 CIMTicketPerMonth >> runOn: aCollection [
-	| tmp |
-	tmp := aCollection groupedBy: [ :ticket | ticket month ].
-	^ tmp associations sorted: [ :a :b | a key <= b key ]
+	| ticketsPerMonth |
+	ticketsPerMonth := aCollection groupedBy: [ :ticket | ticket month ].
+	self fileMonthGap: ticketsPerMonth.
+	^ (ticketsPerMonth associations sorted: [ :a :b | a key <= b key ])
+		asOrderedDictionary
 ]
 
 { #category : #'as yet unclassified' }
@@ -22,14 +30,13 @@ CIMTicketPerMonth >> runOn: aCollection print: aFile [
 				nextPut: $,;
 				nextPutAll: 'value';
 				nextPut: Character cr ].
-	(self runOn: aCollection)
+	(self clean: (self runOn: aCollection))
 		do: [ :each | 
 			file
 				writeStreamDo: [ :aStream | 
 					aStream setToEnd.
 					each key printOn: aStream.
-					aStream
-						nextPut: $,.
-						 each value size printOn: aStream.
-						aStream nextPut: Character cr ] ]
+					aStream nextPut: $,.
+					each value size printOn: aStream.
+					aStream nextPut: Character cr ] ]
 ]

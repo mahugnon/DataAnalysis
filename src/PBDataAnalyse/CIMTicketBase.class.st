@@ -36,7 +36,10 @@ CIMTicketBase >> evolutionCorrectionPerYearForBibliotheque: aBiblioName [
 
 { #category : #initialization }
 CIMTicketBase >> loadTickets [
-	^self loadTicketsFromFilename: 'ticketsCIM.csv'
+	^ self
+		loadTicketsFromFilename:
+			(CIMIceBergProjectLocator new locationOfProjectRepo: 'PBDataAnalyse')
+				/ 'CSVFiles/ticketsCIM.csv'
 ]
 
 { #category : #initialization }
