@@ -18,13 +18,14 @@ CIMResultGenerator >> buildEverything [
 ]
 
 { #category : #'as yet unclassified' }
+CIMResultGenerator >> ensureGrangerTestResultDirectoryCreation [
+	^ (self repoPath / 'CSVFiles/GrangerTestResult')
+		ensureCreateDirectory
+]
+
+{ #category : #'as yet unclassified' }
 CIMResultGenerator >> ensureTimeSerieDirectoryCreation [
-	^ (self repoPath
-		/
-			(String
-				streamContents: [ :aStream | 
-					'CSVFiles/timeSeries' printOn: aStream.
-					Date today ddmmyyyy printOn: aStream ])) ensureCreateDirectory
+	^ (self repoPath / 'CSVFiles/timeSeries') ensureCreateDirectory
 ]
 
 { #category : #'as yet unclassified' }
@@ -40,13 +41,7 @@ CIMResultGenerator >> generateMonthTimeSerie [
 				correction:
 					(CIMTicketPerMonth new
 						runOn: (CIMQueryCorrectiveMaintenance new runOn: each tickets));
-				printOn:
-					timeSerielocation
-						/
-							(String
-								streamContents: [ :aStream | 
-									each nom printOn: aStream.
-									'.csv' printOn: aStream ]) ]
+				printOn: timeSerielocation / each nom , '.csv' ]
 ]
 
 { #category : #'as yet unclassified' }

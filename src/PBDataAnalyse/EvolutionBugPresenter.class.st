@@ -23,6 +23,8 @@ EvolutionBugPresenter >> drawEvolutionCorrectionPerYearForTickets: aTicketCollec
 	roassal := graph draw.
 	roassal axisY noDecimal.
 	roassal title: aString.
-	roassal open.
-	^ roassal
+	^ RTPNGExporter new
+		builder: roassal build;
+		fileName: 'graph/' , aString , '.png';
+		exportToFile
 ]

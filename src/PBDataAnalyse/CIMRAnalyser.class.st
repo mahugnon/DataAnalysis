@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMRAnalyser,
 	#superclass : #Object,
-	#category : #'PBDataAnalyse-RScript'
+	#category : #'PBDataAnalyse-Utils'
 }
 
 { #category : #testing }
