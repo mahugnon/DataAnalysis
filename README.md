@@ -1,4 +1,4 @@
 # DataAnalysis
 ##Entry Point.
 
-Run the project by executing `CIMResultGenerator new generateEverything` 
+Run the project by executing `CIMResultGenerator new buildEverything` 
