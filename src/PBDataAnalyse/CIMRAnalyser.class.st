@@ -14,7 +14,7 @@ CIMRAnalyser >> grangerResultPath [
 	^ self repoPath / 'GrangerTestResult'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CIMRAnalyser >> grangerScriptPath [
 	^ self repoPath / 'R/grangerTest.R'
 ]
@@ -62,9 +62,15 @@ CIMRAnalyser >> output: anObject [
 	output := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 CIMRAnalyser >> runGranger [
 	| command outputFileName errorFileName |
+	self isRInPath
+		ifFalse: [ UIManager default
+				abort:
+					'Rscript could not be found in the path. R must be installed and Rscript''s directory must be added to the system path'.
+			"Return non-zero means something bad happened"
+			^ 1 ].
 	outputFileName := self repoPath / 'Logs/output.txt'.
 	errorFileName := self repoPath / 'Logs/errors.txt'.
 	command := self localRCommand , ' ' , self grangerScriptPath fullName
