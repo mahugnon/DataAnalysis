@@ -13,8 +13,7 @@ Class {
 CIMResultGenerator >> buildEverything [
 	self loadData.
 	self ensureDirectoriesCreation.
-	bibliothequeBase
-		printOn: self repoPath / 'CSVFiles/bib_loc_ev_bug.csv'.
+	bibliothequeBase printOn: self repoPath / 'bib_loc_ev_bug.csv'.
 	self generateMonthTimeSerie.
 	bibliothequeBase drawEvolutionBugGraph.
 	self runGrangerTestsWithOrder: 2
