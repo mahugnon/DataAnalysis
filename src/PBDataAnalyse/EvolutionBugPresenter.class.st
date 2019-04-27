@@ -25,6 +25,11 @@ EvolutionBugPresenter >> drawEvolutionCorrectionPerYearForTickets: aTicketCollec
 	roassal title: aString.
 	^ RTPNGExporter new
 		builder: roassal build;
-		fileName: 'graph/' , aString , '.png';
+		fileName: (self graphLocation / aString , '.png') fullName;
 		exportToFile
+]
+
+{ #category : #'as yet unclassified' }
+EvolutionBugPresenter >> graphLocation [
+	^ CIMResultGenerator new repoPath / 'Graphs'
 ]
