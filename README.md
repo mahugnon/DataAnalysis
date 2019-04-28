@@ -1,5 +1,5 @@
 # DataAnalysis
-##Entry Point.
+##Entry Point:
 
 Run the project by executing `CIMResultGenerator new buildEverything` .
 
