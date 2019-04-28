@@ -31,5 +31,5 @@ EvolutionBugPresenter >> drawEvolutionCorrectionPerYearForTickets: aTicketCollec
 
 { #category : #'as yet unclassified' }
 EvolutionBugPresenter >> graphLocation [
-	^ CIMResultGenerator new repoPath / 'Graphs'
+	^ CIMResultGenerator new resultPath / 'Graphs'
 ]
