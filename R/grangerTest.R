@@ -1,6 +1,6 @@
 
 args <- commandArgs(TRUE)
-aVector = args[1]
+aVector =read.csv(args[1])
 mylags = as.integer(args[2])
 resultFile = args[3]
 
