@@ -1,7 +1,7 @@
 Class {
 	#name : #PBBar,
 	#superclass : #Object,
-	#category : #'PBDataAnalyse-Presenters'
+	#category : #'PBDataAnalyse-RoassalPresenters'
 }
 
 { #category : #'drawing-general' }

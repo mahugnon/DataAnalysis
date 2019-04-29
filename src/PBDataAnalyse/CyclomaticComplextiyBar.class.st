@@ -4,7 +4,7 @@ To be improve . Just temporarie
 Class {
 	#name : #CyclomaticComplextiyBar,
 	#superclass : #PBBar,
-	#category : #'PBDataAnalyse-Presenters'
+	#category : #'PBDataAnalyse-RoassalPresenters'
 }
 
 { #category : #'drawing-general' }

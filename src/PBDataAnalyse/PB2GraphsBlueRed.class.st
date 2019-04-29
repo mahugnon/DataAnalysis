@@ -6,7 +6,7 @@ Class {
 		'data2',
 		'maxY'
 	],
-	#category : #'PBDataAnalyse-Presenters'
+	#category : #'PBDataAnalyse-RoassalPresenters'
 }
 
 { #category : #accessing }

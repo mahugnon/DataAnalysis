@@ -4,19 +4,19 @@ Class {
 	#instVars : [
 		'allTickets',
 		'bibliothequeBase',
-		'order'
+		'lags'
 	],
 	#category : #'PBDataAnalyse-Utils'
 }
 
 { #category : #'as yet unclassified' }
 CIMResultGenerator >> buildEverything [
-	self loadData.
 	self ensureDirectoriesCreation.
+	self loadData.
 	bibliothequeBase printOn: self resultPath / 'bib_loc_ev_bug.csv'.
 	self generateMonthTimeSerie.
 	bibliothequeBase drawEvolutionBugGraph.
-	self runGrangerTestsWithOrder: 2
+	self runGrangerTests
 ]
 
 { #category : #'as yet unclassified' }
@@ -31,6 +31,17 @@ CIMResultGenerator >> generateMonthTimeSerie [
 					(CIMTicketPerMonth new
 						runOn: (CIMQueryCorrectiveMaintenance new runOn: each tickets));
 				printOn: self resultPath / 'timeSeries' / each nom , '.csv' ]
+]
+
+{ #category : #initialization }
+CIMResultGenerator >> initialize [
+	super initialize.
+	lags := 2
+]
+
+{ #category : #accessing }
+CIMResultGenerator >> lags: anObject [
+	lags := anObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -48,12 +59,12 @@ CIMResultGenerator >> loadData [
 ]
 
 { #category : #'as yet unclassified' }
-CIMResultGenerator >> runGrangerTestsWithOrder: anInteger [
+CIMResultGenerator >> runGrangerTests [
 	^ (self resultPath / 'timeSeries') asFileReference visibleFiles
 		do: [ :aFile | 
 			CIMRAnalyser new
 				input: aFile fullName;
 				output: (aFile basename copyReplaceAll: 'csv' with: 'txt');
-				order: anInteger;
+				lags: lags;
 				runGranger ]
 ]

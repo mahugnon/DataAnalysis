@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'input',
 		'output',
-		'order'
+		'lags'
 	],
 	#category : #'PBDataAnalyse-Utils'
 }
@@ -38,18 +38,18 @@ CIMRAnalyser >> isRInPath [
 ]
 
 { #category : #accessing }
+CIMRAnalyser >> lags [
+	^ lags
+]
+
+{ #category : #accessing }
+CIMRAnalyser >> lags: anInteger [
+	lags := anInteger
+]
+
+{ #category : #accessing }
 CIMRAnalyser >> localRCommand [
 ^'Rscript'
-]
-
-{ #category : #accessing }
-CIMRAnalyser >> order [
-	^ order
-]
-
-{ #category : #accessing }
-CIMRAnalyser >> order: anInteger [
-	order := anInteger
 ]
 
 { #category : #accessing }
@@ -74,7 +74,7 @@ CIMRAnalyser >> runGranger [
 	outputFileName := self resultPath  / 'Logs/output.txt'.
 	errorFileName := self resultPath  / 'Logs/errors.txt'.
 	command := self localRCommand , ' ' , self grangerScriptPath fullName
-		, ' ' , self input , ' ' , self order asString , ' '
+		, ' ' , self input , ' ' , self lags asString , ' '
 		, self output fullName.
 	LibC
 		runCommand:

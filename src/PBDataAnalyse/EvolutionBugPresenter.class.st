@@ -1,7 +1,7 @@
 Class {
 	#name : #EvolutionBugPresenter,
 	#superclass : #Object,
-	#category : #'PBDataAnalyse-Presenters'
+	#category : #'PBDataAnalyse-RoassalPresenters'
 }
 
 { #category : #drawing }
