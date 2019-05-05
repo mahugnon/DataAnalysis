@@ -63,7 +63,12 @@ TestPBAnalyser >> testExtactGrangerResultFromTestFile [
 		assert:
 			(CIMGrangerResult new
 				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test5.txt')
-		equals: 0
+		equals: 0.
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test6.txt')
+		equals: 2.2e-16
 ]
 
 { #category : #tests }

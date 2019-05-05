@@ -15,7 +15,7 @@ CIMAbstractGenerator >> ensureDirectoriesCreation [
 
 { #category : #'as yet unclassified' }
 CIMAbstractGenerator >> grangerFolder [
-	(self resultPath / 'GrangerTestResult') ensureCreateDirectory
+	^ (self resultPath / 'GrangerTestResult') ensureCreateDirectory
 ]
 
 { #category : #'as yet unclassified' }

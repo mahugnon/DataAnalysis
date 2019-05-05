@@ -110,7 +110,16 @@ CIMBibliothequeBase >> saveBibliothqueNames: aCollection in: aPath [
 
 { #category : #'as yet unclassified' }
 CIMBibliothequeBase >> saveGrangerResultsFrom: grangerResultsFolder [
-	grangerResultsFolder asFileReference
+	| abib |
+	grangerResultsFolder asFileReference directories
+		do: [ :lagDir | 
+			lagDir visibleFiles
+				do: [ :aFile | 
+					abib := self
+						searchBiblioNamed: (aFile basename copyReplaceAll: '..txt' with: '').
+					abib
+						saveGrangerResultWith: aFile
+						forLag: lagDir basename asInteger ] ]
 ]
 
 { #category : #utilities }

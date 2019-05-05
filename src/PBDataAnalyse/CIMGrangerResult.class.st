@@ -16,8 +16,8 @@ CIMGrangerResult >> extactGrangerResultFromFile: aFile [
 	| contents |
 	contents := aFile asFileReference contents.
 	contents ifEmpty: [ ^ 0 ].
-	^ (((Character space split: ((Character lf split: contents) at: 7))
-		reject: [ :ch | ch = '' ]) at: 5) asNumber
+	^ ((((Character space split: ((Character lf split: contents) at: 7))
+		reject: [ :ch | ch = '' ]) reject: [ :each| each = '<' ] )at: 5) asNumber
 ]
 
 { #category : #initialization }
