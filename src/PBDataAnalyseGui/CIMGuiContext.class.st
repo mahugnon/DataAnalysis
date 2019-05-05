@@ -9,12 +9,12 @@ Class {
 }
 
 { #category : #accessing }
-CIMGuiContext >> lags [
+CIMGuiContext >> lag [
 	^ lags
 ]
 
 { #category : #accessing }
-CIMGuiContext >> lags: anObject [
+CIMGuiContext >> lag: anObject [
 	lags := anObject
 ]
 

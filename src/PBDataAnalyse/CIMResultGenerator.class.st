@@ -45,7 +45,7 @@ CIMResultGenerator >> initialize [
 ]
 
 { #category : #accessing }
-CIMResultGenerator >> lags: anObject [
+CIMResultGenerator >> lag: anObject [
 	lags := anObject
 ]
 
@@ -70,6 +70,6 @@ CIMResultGenerator >> runGrangerTests [
 			CIMRAnalyser new
 				input: aFile fullName;
 				output: (aFile basename copyReplaceAll: 'csv' with: 'txt');
-				lags: lags;
+				lag: lags;
 				runGranger ]
 ]

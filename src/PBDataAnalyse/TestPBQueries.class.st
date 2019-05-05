@@ -58,15 +58,6 @@ TestPBQueries >> setUp [
 						biblioNom: 'B2') ;yourself)
 ]
 
-{ #category : #tests }
-TestPBQueries >> testCIMGroupQueryTopRecurentBibliotheque [
-	self
-		assert:
-			((CIMGroupQueryTopRecurentBibliotheque new treshold: 2)
-				runOn: analyser tickets) anyOne
-		equals: 'B3'
-]
-
 { #category : #running }
 TestPBQueries >> testCIMQueryCorrectiveMaintenance [
 	self
@@ -105,16 +96,6 @@ TestPBQueries >> testCIMQueryMisc [
 	self
 		assert: (CIMQueryMisc new runOn: analyser tickets) size
 		equals: 2
-]
-
-{ #category : #tests }
-TestPBQueries >> testGetBibliothequesMostOccurentBetweenBugAndEvolutionPerYear [
-	self
-		assertCollection:
-			(CIMQueryMostOccurentEventPerYearForBibliotheque new
-				runOn: analyser tickets
-				with: 'B1')
-		hasSameElements: {2004 -> 'Evolution'. 2009 -> 'Evolution'. 2014 -> 'Evolution'}
 ]
 
 { #category : #running }

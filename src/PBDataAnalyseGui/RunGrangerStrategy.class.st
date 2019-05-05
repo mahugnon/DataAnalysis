@@ -7,7 +7,12 @@ Class {
 { #category : #'as yet unclassified' }
 RunGrangerStrategy >> runWithLag: anInteger [
 	^ CIMResultGenerator new
-		lags: anInteger;
+		lag: anInteger;
 		ensureDirectoriesCreation;
 		runGrangerTests
+]
+
+{ #category : #'as yet unclassified' }
+RunGrangerStrategy >> runWithLags: aCollection [
+	aCollection do: [ :each | self runWithLag: each ]
 ]

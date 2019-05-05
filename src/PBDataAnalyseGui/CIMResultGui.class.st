@@ -52,7 +52,7 @@ CIMResultGui >> initializePresenter [
 		whenActivatedDo: [ self guiContext runStrategy: RunGrangerStrategy ].
 	runButton
 		action: [ self guiContext
-				lags: grangerLag text;
+				lag: grangerLag text;
 				run ]
 ]
 

@@ -7,6 +7,6 @@ Class {
 { #category : #'as yet unclassified' }
 RunAllStrategy >> runWithLag: anInteger [
 	^ CIMResultGenerator new
-		lags: anInteger;
+		lag: anInteger;
 		buildEverything
 ]
