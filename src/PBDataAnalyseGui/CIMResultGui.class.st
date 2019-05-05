@@ -6,8 +6,7 @@ Class {
 		'runGrangerTestButton',
 		'grangerLag',
 		'runButton',
-		'guiContext',
-		'lagLabel'
+		'guiContext'
 	],
 	#category : #'PBDataAnalyseGui-presenter'
 }
@@ -15,15 +14,11 @@ Class {
 { #category : #specs }
 CIMResultGui class >> defaultSpec [
 	^ SpecTableLayout column
-		cellSpacing: 0.1;
 		newRow: [ :row | 
 			row
 				add: #runAllButton;
 				add: #runGrangerTestButton ];
-		newRow: [ :row | 
-			row
-				add: #lagLabel;
-				add: #grangerLag ];
+		add: #grangerLag;
 		add: #runButton;
 		yourself
 ]
@@ -36,7 +31,7 @@ CIMResultGui class >> run [
 
 { #category : #api }
 CIMResultGui >> extent [
-	^ 350 @ 170
+	^ 350 @ 200
 ]
 
 { #category : #accessing }
@@ -69,20 +64,9 @@ CIMResultGui >> initializeWidgets [
 		label: 'Run only GrangerTest'.
 	RadioButtonGroup new
 		addRadioButton: runAllButton;
-		addRadioButton: runGrangerTestButton;
-		default: runAllButton.
-	grangerLag := self newTextInput
-		autoAccept: true;
-		yourself.
-	lagLabel := self newLabel
-		label: 'Granger lags';
-		emphasis: #bold.
+		addRadioButton: runGrangerTestButton.
+	grangerLag := self newTextInput ghostText: 'GrangerTest lag'.
 	runButton := self newButton label: 'RUN'
-]
-
-{ #category : #initialization }
-CIMResultGui >> lagLabel [
-	^ lagLabel
 ]
 
 { #category : #accessing }
