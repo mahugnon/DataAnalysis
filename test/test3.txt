@@ -1,0 +1,7 @@
+Granger causality test
+
+Model 1: aVector$corretion ~ Lags(aVector$corretion, 1:11) + Lags(aVector$evolution, 1:11)
+Model 2: aVector$corretion ~ Lags(aVector$corretion, 1:11)
+  Res.Df  Df      F Pr(>F)
+1    153                  
+2    164 -11 1.3996 0.1782
