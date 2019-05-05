@@ -6,7 +6,8 @@ Class {
 		'loc',
 		'numberOfBug',
 		'numberOfEvolution',
-		'tickets'
+		'tickets',
+		'grangerResultHolder'
 	],
 	#category : #'PBDataAnalyse-model'
 }
@@ -16,6 +17,12 @@ CIMBibliotheque >> drawEvolutionBugGraph [
 	^ EvolutionBugPresenter new
 		drawEvolutionCorrectionPerYearForTickets: tickets
 		title: nom
+]
+
+{ #category : #initialization }
+CIMBibliotheque >> initialize [
+	super initialize.
+	grangerResultHolder := CIMGrangerResult new
 ]
 
 { #category : #accessing }
@@ -70,6 +77,13 @@ CIMBibliotheque >> printOn: aStream [
 		nextPut: $,;
 		nextPutAll: numberOfEvolution asString;
 		nextPut: Character cr
+]
+
+{ #category : #'as yet unclassified' }
+CIMBibliotheque >> saveGrangerResultWith: grangerResultFile forLag: anInteger [
+	^ grangerResultHolder
+		saveGrangerResultWith: grangerResultFile
+		forLag: anInteger
 ]
 
 { #category : #accessing }

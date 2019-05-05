@@ -25,3 +25,10 @@ CIMGrangerResult >> initialize [
 	super initialize.
 	results := Dictionary new
 ]
+
+{ #category : #'as yet unclassified' }
+CIMGrangerResult >> saveGrangerResultWith: grangerResultFile forLag: anInteger [
+	^ results
+		at: anInteger
+		put: (self extactGrangerResultFromFile: grangerResultFile)
+]
