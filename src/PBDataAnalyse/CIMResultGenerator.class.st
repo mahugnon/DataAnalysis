@@ -9,6 +9,11 @@ Class {
 	#category : #'PBDataAnalyse-Utils'
 }
 
+{ #category : #accessing }
+CIMResultGenerator >> allTickets [
+	^ allTickets
+]
+
 { #category : #'as yet unclassified' }
 CIMResultGenerator >> buildEverything [
 	self ensureDirectoriesCreation.

@@ -38,7 +38,6 @@ PB2GraphsBlueRed >> draw [
 	ds connectColor: Color blue.
 	ds points: data1 keys.
 	ds y: [ :year | data1 at: year ].
-	ds label: 'Evolution'.
 	b add: ds.
 	b minX: 2003.
 	b maxX: 2019.
@@ -47,7 +46,6 @@ PB2GraphsBlueRed >> draw [
 	"ds barShape color: Color red."
 	ds connectColor: Color red.
 	ds points: data2 keys.
-	ds label: 'Bugs'.
 	ds y: [ :year | data2 at: year ].
 	b add: ds.
 	maxY ifNotNil: [ b maxY: maxY ].
@@ -59,10 +57,6 @@ PB2GraphsBlueRed >> draw [
 			(v < 1 or: [ v > data1 keys size ])
 				ifTrue: [ ''	"for 0" ]
 				ifFalse: [ (data1 keys at: v) asString ] ].
-	b axisY
-		title: 'Number of Evolution or Bugs';
-		noDecimal.
-	b legend below.
 	^ b
 ]
 

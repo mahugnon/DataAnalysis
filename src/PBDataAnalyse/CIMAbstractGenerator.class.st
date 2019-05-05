@@ -9,8 +9,13 @@ CIMAbstractGenerator >> ensureDirectoriesCreation [
 	(self repoPath / 'Generated') ensureCreateDirectory.
 	(self resultPath / 'Graphs') ensureCreateDirectory.
 	(self resultPath / 'Logs') ensureCreateDirectory.
-	(self resultPath / 'GrangerTestResult') ensureCreateDirectory.
+	self grangerFolder.
 	(self resultPath / 'timeSeries') ensureCreateDirectory
+]
+
+{ #category : #'as yet unclassified' }
+CIMAbstractGenerator >> grangerFolder [
+	(self resultPath / 'GrangerTestResult') ensureCreateDirectory
 ]
 
 { #category : #'as yet unclassified' }
