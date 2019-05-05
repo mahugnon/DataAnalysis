@@ -76,6 +76,43 @@ CIMBibliothequeBase >> mergeBaseWith: aBibBase1 [
 ]
 
 { #category : #printing }
+CIMBibliothequeBase >> printGrangerResultOn: aFile [
+	aFile asFileReference
+		writeStreamDo: [ :aStream | 
+			aStream
+				nextPutAll: 'Biblio name';
+				nextPut: $,;
+				nextPutAll: 'Lag1';
+				nextPut: $,;
+				nextPutAll: 'Lag2';
+				nextPut: $,;
+				nextPutAll: 'Lag3';
+				nextPut: $,;
+				nextPutAll: 'Lag4';
+				nextPut: $,;
+				nextPutAll: 'Lag5';
+				nextPut: $,;
+				nextPutAll: 'Lag6';
+				nextPut: $,;
+				nextPutAll: 'Lag7';
+				nextPut: $,;
+				nextPutAll: 'Lag8';
+				nextPut: $,;
+				nextPutAll: 'Lag9';
+				nextPut: $,;
+				nextPutAll: 'Lag10';
+				nextPut: $,;
+				nextPutAll: 'Lag11';
+				nextPut: $,;
+				nextPutAll: 'Lag12';
+				nextPut: Character cr.
+			bibliotheques
+				do: [ :bib | 
+					bib printGrangerResultOn: aStream.
+					aStream nextPut: Character cr ] ]
+]
+
+{ #category : #printing }
 CIMBibliothequeBase >> printOn: aFileReference [
 	| aStream file |
 	file := aFileReference asFileReference.

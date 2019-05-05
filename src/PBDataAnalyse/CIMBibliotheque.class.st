@@ -66,6 +66,13 @@ CIMBibliotheque >> numberOfEvolution: anObject [
 ]
 
 { #category : #printing }
+CIMBibliotheque >> printGrangerResultOn: aStream [
+	nom printOn: aStream.
+	aStream nextPut: $,.
+	grangerResultHolder printResultOn: aStream
+]
+
+{ #category : #printing }
 CIMBibliotheque >> printOn: aStream [
 	^ aStream
 		setToEnd;

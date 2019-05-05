@@ -26,6 +26,16 @@ CIMGrangerResult >> initialize [
 	results := Dictionary new
 ]
 
+{ #category : #printing }
+CIMGrangerResult >> printResultOn: aStream [
+	results
+		keysDo: [ :key | 
+			aStream setToEnd.
+			(results at: key) printOn: aStream.
+			key = 12
+				ifFalse: [ aStream nextPut: $, ] ]
+]
+
 { #category : #'as yet unclassified' }
 CIMGrangerResult >> saveGrangerResultWith: grangerResultFile forLag: anInteger [
 	^ results
