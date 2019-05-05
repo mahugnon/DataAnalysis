@@ -67,32 +67,6 @@ PB2GraphsBlueRed >> draw [
 ]
 
 { #category : #accessing }
-PB2GraphsBlueRed >> exportData: aFileReference [
-	| stream years |
-	years := data1 size >= data2 size
-		ifTrue: [ data1 keys ]
-		ifFalse: [ data2 keys ].
-	stream := aFileReference asFileReference writeStream.
-	stream
-		nextPutAll: 'years';
-		nextPut: $,;
-		nextPutAll: 'evolution';
-		nextPut: $,;
-		nextPutAll: 'corretion';
-		nextPut: Character cr.
-	years
-		do: [ :year | 
-			stream
-				setToEnd;
-				nextPutAll: year asString;
-				nextPut: $,;
-				nextPutAll: (data1 at: year ifAbsent: [ 0 ]) asString;
-				nextPut: $,;
-				nextPutAll: (data2 at: year ifAbsent: [ 0 ]) asString;
-				nextPut: Character cr ]
-]
-
-{ #category : #accessing }
 PB2GraphsBlueRed >> maxY: aNumber [
 	maxY := aNumber
 ]

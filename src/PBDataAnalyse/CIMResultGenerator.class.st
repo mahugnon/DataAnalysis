@@ -65,6 +65,9 @@ CIMResultGenerator >> loadData [
 
 { #category : #'as yet unclassified' }
 CIMResultGenerator >> runGrangerTests [
+	(self resultPath / 'timeSeries') hasFiles
+		ifFalse:
+			[ self error: 'You should provide time serie data to run Granger test' ].
 	^ (self resultPath / 'timeSeries') asFileReference visibleFiles
 		do: [ :aFile | 
 			CIMRAnalyser new

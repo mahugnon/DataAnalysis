@@ -14,5 +14,5 @@ RunGrangerStrategy >> runWithLag: anInteger [
 
 { #category : #'as yet unclassified' }
 RunGrangerStrategy >> runWithLags: aCollection [
-	aCollection do: [ :each | self runWithLag: each ]
+	^ aCollection do: [ :each | self runWithLag: each ]
 ]
