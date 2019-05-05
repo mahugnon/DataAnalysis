@@ -38,6 +38,35 @@ TestPBAnalyser >> setUp [
 ]
 
 { #category : #tests }
+TestPBAnalyser >> testExtactGrangerResultFromTestFile [
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test1.txt')
+		equals: 0.04169.
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test2.txt')
+		equals: 0.0003314.
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test3.txt')
+		equals: 0.1782.
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test4.txt')
+		equals: 0.09286.
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/test5.txt')
+		equals: 0
+]
+
+{ #category : #tests }
 TestPBAnalyser >> testTheyShouldBe3ticketFrom2004 [
 	self assert: (analyser ticketsFrom: 2004) size equals: 3
 ]

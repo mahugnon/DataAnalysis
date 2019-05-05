@@ -2,7 +2,8 @@ Class {
 	#name : #CIMBibliothequeBase,
 	#superclass : #CIMBase,
 	#instVars : [
-		'bibliotheques'
+		'bibliotheques',
+		'grangerResultHolder'
 	],
 	#category : #'PBDataAnalyse-Core'
 }
@@ -34,6 +35,16 @@ CIMBibliothequeBase >> createBibliothequesIn: aFolder from: aTicketCollection [
 CIMBibliothequeBase >> drawEvolutionBugGraph [
 bibliotheques ifEmpty: [ ^self ].
 bibliotheques do: [ :each| each drawEvolutionBugGraph ]
+]
+
+{ #category : #accessing }
+CIMBibliothequeBase >> grangerResultHolder [
+	^ grangerResultHolder
+]
+
+{ #category : #accessing }
+CIMBibliothequeBase >> grangerResultHolder: aCIMGrangerResult [
+	grangerResultHolder := aCIMGrangerResult
 ]
 
 { #category : #initialization }
