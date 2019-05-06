@@ -35,8 +35,8 @@ CIMTicketPerMonth >> runOn: aCollection print: aFile [
 			file
 				writeStreamDo: [ :aStream | 
 					aStream setToEnd.
-					each key printOn: aStream.
+					each key printOnFile: aStream.
 					aStream nextPut: $,.
-					each value size printOn: aStream.
+					each value size printOnFile: aStream.
 					aStream nextPut: Character cr ] ]
 ]

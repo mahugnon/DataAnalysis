@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+CIMGrangerResult >> bestGrangerValue [
+	^ (results associations sort: [ :a :b | a value < b value ]) first
+]
+
+{ #category : #'as yet unclassified' }
 CIMGrangerResult >> extactGrangerResultFromFile: aFile [
 	| contents |
 	contents := aFile asFileReference contents.
@@ -31,7 +36,7 @@ CIMGrangerResult >> printResultOn: aStream [
 	results
 		keysDo: [ :key | 
 			aStream setToEnd.
-			(results at: key) printOn: aStream.
+			(results at: key) printOnFile: aStream.
 			key = 12
 				ifFalse: [ aStream nextPut: $, ] ]
 ]

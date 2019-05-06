@@ -12,11 +12,26 @@ Class {
 	#category : #'PBDataAnalyse-model'
 }
 
+{ #category : #accessing }
+CIMBibliotheque >> bestGrangerValue [
+	^ grangerResultHolder bestGrangerValue
+]
+
+{ #category : #'as yet unclassified' }
+CIMBibliotheque >> bugProportion: totalBugs [
+	^(( numberOfBug / totalBugs) * 100) printShowingDecimalPlaces: 3
+]
+
 { #category : #'as yet unclassified' }
 CIMBibliotheque >> drawEvolutionBugGraph [
 	^ EvolutionBugPresenter new
 		drawEvolutionCorrectionPerYearForTickets: tickets
 		title: nom
+]
+
+{ #category : #'as yet unclassified' }
+CIMBibliotheque >> evolutionProportion: totalEvolution [
+	^ ((numberOfBug / totalEvolution) * 100) 	printShowingDecimalPlaces: 3
 ]
 
 { #category : #initialization }
@@ -67,13 +82,13 @@ CIMBibliotheque >> numberOfEvolution: anObject [
 
 { #category : #printing }
 CIMBibliotheque >> printGrangerResultOn: aStream [
-	nom printOn: aStream.
+	nom printOnFile: aStream.
 	aStream nextPut: $,.
 	grangerResultHolder printResultOn: aStream
 ]
 
 { #category : #printing }
-CIMBibliotheque >> printOn: aStream [
+CIMBibliotheque >> printOnFile: aStream [
 	^ aStream
 		setToEnd;
 		nextPutAll: nom;

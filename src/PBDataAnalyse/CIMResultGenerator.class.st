@@ -18,7 +18,7 @@ CIMResultGenerator >> allTickets [
 CIMResultGenerator >> buildEverything [
 	self ensureDirectoriesCreation.
 	self loadData.
-	bibliothequeBase printOn: self resultPath / 'bib_loc_ev_bug.csv'.
+	bibliothequeBase printOnFile: self resultPath / 'bib_loc_ev_bug.csv'.
 	self generateMonthTimeSerie.
 	bibliothequeBase drawEvolutionBugGraph.
 	self runGrangerTests
@@ -35,7 +35,7 @@ CIMResultGenerator >> generateMonthTimeSerie [
 				correction:
 					(CIMTicketPerMonth new
 						runOn: (CIMQueryCorrectiveMaintenance new runOn: each tickets));
-				printOn: self resultPath / 'timeSeries' / each nom , '.csv' ]
+				printOnFile: self resultPath / 'timeSeries' / each nom , '.csv' ]
 ]
 
 { #category : #initialization }

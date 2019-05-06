@@ -12,9 +12,25 @@ CIMBibliothequeBase >> addBibiothequeWith: aDictionary [
 	bibliotheques add: (CIMBibliotheque new updateWith: aDictionary)
 ]
 
+{ #category : #'as yet unclassified' }
+CIMBibliothequeBase >> bestGrangers [
+	^ bibliotheques collect: [ :bib | bib nom -> bib bestGrangerValue ]
+]
+
 { #category : #acccessing }
 CIMBibliothequeBase >> bibliotheques [
 	^ bibliotheques
+]
+
+{ #category : #'as yet unclassified' }
+CIMBibliothequeBase >> bugSEvolutionsProportion [
+	^ bibliotheques
+		collect: [ :bib | 
+			bib nom
+				->
+					{('bugsProportion' -> (bib bugProportion: self totalBugs)).
+					('EvolutionProportion'
+						-> (bib evolutionProportion: self totalEvolution))} ]
 ]
 
 { #category : #utilities }
@@ -113,7 +129,7 @@ CIMBibliothequeBase >> printGrangerResultOn: aFile [
 ]
 
 { #category : #printing }
-CIMBibliothequeBase >> printOn: aFileReference [
+CIMBibliothequeBase >> printOnFile: aFileReference [
 	| aStream file |
 	file := aFileReference asFileReference.
 	file
@@ -129,7 +145,7 @@ CIMBibliothequeBase >> printOn: aFileReference [
 				nextPut: Character cr ].
 	aStream := file writeStream.
 	bibliotheques
-		ifNotEmpty: [ bibliotheques do: [ :each | each printOn: aStream ] ]
+		ifNotEmpty: [ bibliotheques do: [ :each | each printOnFile: aStream ] ]
 ]
 
 { #category : #utilities }
@@ -141,7 +157,7 @@ CIMBibliothequeBase >> saveBibliothqueNames: aCollection in: aPath [
 			stream
 				writeStreamDo: [ :aStream | 
 					aStream setToEnd.
-					each printOn: aStream.
+					each printOnFile: aStream.
 					aStream nextPut: Character cr ] ]
 ]
 
@@ -169,6 +185,20 @@ CIMBibliothequeBase >> searchBiblioNamed: aString [
 { #category : #sorting }
 CIMBibliothequeBase >> sort [
 	self bibliotheques sort: [ :a :b | a nom < b nom ]
+]
+
+{ #category : #accessing }
+CIMBibliothequeBase >> totalBugs [
+	^ (CIMQueryCorrectiveMaintenance new
+		runOn: (bibliotheques collect: [ :each | each tickets ]) flatten asSet)
+		size
+]
+
+{ #category : #accessing }
+CIMBibliothequeBase >> totalEvolution [
+	^ (CIMQueryEvolution new
+		runOn: (bibliotheques collect: [ :each | each tickets ]) flatten asSet)
+		size
 ]
 
 { #category : #utilities }

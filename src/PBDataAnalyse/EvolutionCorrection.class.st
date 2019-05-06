@@ -24,7 +24,7 @@ EvolutionCorrection >> evolution: anObject [
 ]
 
 { #category : #printing }
-EvolutionCorrection >> printOn: aFile [
+EvolutionCorrection >> printOnFile: aFile [
 	| timeSerie file |
 	timeSerie := evolution size >= correction size
 		ifTrue: [ evolution keys ]
@@ -44,10 +44,10 @@ EvolutionCorrection >> printOn: aFile [
 			file
 				writeStreamDo: [ :aStream | 
 					aStream setToEnd.
-					time printOn: aStream.
+					time printOnFile: aStream.
 					aStream nextPut: $,.
-					(evolution at: time ifAbsent: [ {} ]) size printOn: aStream.
+					(evolution at: time ifAbsent: [ {} ]) size printOnFile: aStream.
 					aStream nextPut: $,.
-					(correction at: time ifAbsent: [ {} ]) size printOn: aStream.
+					(correction at: time ifAbsent: [ {} ]) size printOnFile: aStream.
 					aStream nextPut: Character cr ] ]
 ]
