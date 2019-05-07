@@ -72,6 +72,27 @@ TestPBAnalyser >> testExtactGrangerResultFromTestFile [
 ]
 
 { #category : #tests }
+TestPBAnalyser >> testGrangerTestProvideTheRightOutput [
+	CIMRAnalyserMoqueEntity new runGranger.
+	self
+		assert:
+			(CIMResultGenerator new repoPath / 'test/testGrangerResult.txt')
+				exists
+		equals: true.
+	self
+		assert: (CIMResultGenerator new repoPath / 'test/output.txt') exists
+		equals: true.
+	self
+		assert: (CIMResultGenerator new repoPath / 'test/errors.txt') exists
+		equals: true.
+	self
+		assert:
+			(CIMGrangerResult new
+				extactGrangerResultFromFile: CIMResultGenerator new repoPath / 'test/testGrangerResult.txt')
+		equals: 0.4015
+]
+
+{ #category : #tests }
 TestPBAnalyser >> testTheyShouldBe3ticketFrom2004 [
 	self assert: (analyser ticketsFrom: 2004) size equals: 3
 ]
