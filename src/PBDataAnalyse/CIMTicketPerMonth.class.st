@@ -15,8 +15,8 @@ CIMTicketPerMonth >> runOn: aCollection [
 	| ticketsPerMonth |
 	ticketsPerMonth := aCollection groupedBy: [ :ticket | ticket month ].
 	ticketsPerMonth ifNotEmpty: [ self fileMonthGap: ticketsPerMonth ].
-	^ (ticketsPerMonth associations sorted: [ :a :b | a key <= b key ])
-		asOrderedDictionary
+	^ ticketsPerMonth associations
+		sorted: [ :a :b | a key <= b key ] asOrderedDictionary
 ]
 
 { #category : #'as yet unclassified' }

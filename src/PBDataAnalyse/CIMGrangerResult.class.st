@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CIMGrangerResult >> bestGrangerValue [
+CIMGrangerResult >> bestGranger [
 	^ (results associations sort: [ :a :b | a value < b value ]) first
 ]
 

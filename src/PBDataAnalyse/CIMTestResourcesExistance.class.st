@@ -36,6 +36,11 @@ CIMTestResourcesExistance >> testFindSizeCountRessourceExists [
 		equals: true
 ]
 
+{ #category : #tests }
+CIMTestResourcesExistance >> testGrangerScriptExists [
+	self assert: CIMRAnalyser new grangerScriptPath exists equals: true
+]
+
 { #category : #'as yet unclassified' }
 CIMTestResourcesExistance >> testRInPath [
 self assert: CIMRAnalyser new isRInPath equals: true
