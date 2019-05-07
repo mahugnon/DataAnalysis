@@ -13,25 +13,37 @@ Class {
 }
 
 { #category : #accessing }
-CIMBibliotheque >> bestGrangerValue [
-	^ grangerResultHolder bestGrangerValue
+CIMBibliotheque >> bestGranger [
+	^ grangerResultHolder bestGranger
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliotheque >> bugProportion: totalBugs [
 	^(( numberOfBug / totalBugs) * 100) printShowingDecimalPlaces: 3
 ]
 
 { #category : #'as yet unclassified' }
-CIMBibliotheque >> drawEvolutionBugGraph [
-	^ EvolutionBugPresenter new
-		drawEvolutionCorrectionPerYearForTickets: tickets
-		title: nom
+CIMBibliotheque >> changeTicketBibloNom [
+	tickets do: [ :each | each biblioNom: self nom ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
+CIMBibliotheque >> drawEvolutionBugGraph [
+	EvolutionBugPresenter new
+		exportEvolutionCorrectionPerYearForTickets: tickets title: nom;
+		exportEvolutionCorrectionPerMonthForTickets: tickets title: nom
+]
+
+{ #category : #utilities }
 CIMBibliotheque >> evolutionProportion: totalEvolution [
 	^ ((numberOfBug / totalEvolution) * 100) 	printShowingDecimalPlaces: 3
+]
+
+{ #category : #printing }
+CIMBibliotheque >> exportGrangerResultOn: aStream [
+	nom printOnFile: aStream.
+	aStream nextPut: $,.
+	grangerResultHolder printResultOn: aStream
 ]
 
 { #category : #initialization }
@@ -81,13 +93,6 @@ CIMBibliotheque >> numberOfEvolution: anObject [
 ]
 
 { #category : #printing }
-CIMBibliotheque >> printGrangerResultOn: aStream [
-	nom printOnFile: aStream.
-	aStream nextPut: $,.
-	grangerResultHolder printResultOn: aStream
-]
-
-{ #category : #printing }
 CIMBibliotheque >> printOnFile: aStream [
 	^ aStream
 		setToEnd;
@@ -101,7 +106,7 @@ CIMBibliotheque >> printOnFile: aStream [
 		nextPut: Character cr
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliotheque >> saveGrangerResultWith: grangerResultFile forLag: anInteger [
 	^ grangerResultHolder
 		saveGrangerResultWith: grangerResultFile
