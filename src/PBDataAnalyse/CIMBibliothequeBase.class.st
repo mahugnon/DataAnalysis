@@ -12,9 +12,9 @@ CIMBibliothequeBase >> addBibiothequeWith: aDictionary [
 	bibliotheques add: (CIMBibliotheque new updateWith: aDictionary)
 ]
 
-{ #category : #'as yet unclassified' }
-CIMBibliothequeBase >> bestGrangers [
-	^ bibliotheques collect: [ :bib | bib nom -> bib bestGrangerValue ]
+{ #category : #utilities }
+CIMBibliothequeBase >> bestGranger [
+	^ bibliotheques collect: [ :bib | bib nom -> bib bestGranger ]
 ]
 
 { #category : #acccessing }
@@ -22,7 +22,7 @@ CIMBibliothequeBase >> bibliotheques [
 	^ bibliotheques
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> bugSEvolutionsProportion [
 	^ bibliotheques
 		collect: [ :bib | 
@@ -50,6 +50,69 @@ CIMBibliothequeBase >> createBibliothequesIn: aFolder from: aTicketCollection [
 CIMBibliothequeBase >> drawEvolutionBugGraph [
 bibliotheques ifEmpty: [ ^self ].
 bibliotheques do: [ :each| each drawEvolutionBugGraph ]
+]
+
+{ #category : #exporting }
+CIMBibliothequeBase >> exportAprioriDataSetOn: aFile with: anAssociation [
+	| file |
+	file := aFile asFileReference.
+	file
+		writeStreamDo: [ :aStream | 
+			'ID' printOn: aStream.
+			aStream nextPut: $,.
+			'BibGroup' printOn: aStream.
+			aStream nextPut: Character cr ].
+	anAssociation
+		do: [ :each | 
+			| group |
+			group := $, join: (each value collect: [ :v | v biblioNom ]).
+			^ file
+				writeStreamDo: [ :aStream | 
+					aStream
+						setToEnd;
+						nextPutAll: each key;
+						nextPut: $,;
+						nextPut: $';
+						nextPutAll: group;
+						nextPut: $';
+						nextPut: Character cr ] ]
+]
+
+{ #category : #exporting }
+CIMBibliothequeBase >> exportGrangerResultOn: aFile [
+	aFile asFileReference
+		writeStreamDo: [ :aStream | 
+			aStream
+				nextPutAll: 'Biblio name';
+				nextPut: $,;
+				nextPutAll: 'Lag1';
+				nextPut: $,;
+				nextPutAll: 'Lag2';
+				nextPut: $,;
+				nextPutAll: 'Lag3';
+				nextPut: $,;
+				nextPutAll: 'Lag4';
+				nextPut: $,;
+				nextPutAll: 'Lag5';
+				nextPut: $,;
+				nextPutAll: 'Lag6';
+				nextPut: $,;
+				nextPutAll: 'Lag7';
+				nextPut: $,;
+				nextPutAll: 'Lag8';
+				nextPut: $,;
+				nextPutAll: 'Lag9';
+				nextPut: $,;
+				nextPutAll: 'Lag10';
+				nextPut: $,;
+				nextPutAll: 'Lag11';
+				nextPut: $,;
+				nextPutAll: 'Lag12';
+				nextPut: Character cr.
+			bibliotheques
+				do: [ :bib | 
+					bib exportGrangerResultOn: aStream.
+					aStream nextPut: Character cr ] ]
 ]
 
 { #category : #initialization }
@@ -91,44 +154,7 @@ CIMBibliothequeBase >> mergeBaseWith: aBibBase1 [
 	self sort
 ]
 
-{ #category : #printing }
-CIMBibliothequeBase >> printGrangerResultOn: aFile [
-	aFile asFileReference
-		writeStreamDo: [ :aStream | 
-			aStream
-				nextPutAll: 'Biblio name';
-				nextPut: $,;
-				nextPutAll: 'Lag1';
-				nextPut: $,;
-				nextPutAll: 'Lag2';
-				nextPut: $,;
-				nextPutAll: 'Lag3';
-				nextPut: $,;
-				nextPutAll: 'Lag4';
-				nextPut: $,;
-				nextPutAll: 'Lag5';
-				nextPut: $,;
-				nextPutAll: 'Lag6';
-				nextPut: $,;
-				nextPutAll: 'Lag7';
-				nextPut: $,;
-				nextPutAll: 'Lag8';
-				nextPut: $,;
-				nextPutAll: 'Lag9';
-				nextPut: $,;
-				nextPutAll: 'Lag10';
-				nextPut: $,;
-				nextPutAll: 'Lag11';
-				nextPut: $,;
-				nextPutAll: 'Lag12';
-				nextPut: Character cr.
-			bibliotheques
-				do: [ :bib | 
-					bib printGrangerResultOn: aStream.
-					aStream nextPut: Character cr ] ]
-]
-
-{ #category : #printing }
+{ #category : #exporting }
 CIMBibliothequeBase >> printOnFile: aFileReference [
 	| aStream file |
 	file := aFileReference asFileReference.
@@ -161,7 +187,7 @@ CIMBibliothequeBase >> saveBibliothqueNames: aCollection in: aPath [
 					aStream nextPut: Character cr ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 CIMBibliothequeBase >> saveGrangerResultsFrom: grangerResultsFolder [
 	| abib |
 	grangerResultsFolder asFileReference directories
