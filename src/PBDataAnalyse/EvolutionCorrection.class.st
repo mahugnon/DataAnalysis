@@ -44,10 +44,10 @@ EvolutionCorrection >> printOnFile: aFile [
 			file
 				writeStreamDo: [ :aStream | 
 					aStream setToEnd.
-					time printOnFile: aStream.
+					time printOn: aStream.
 					aStream nextPut: $,.
-					(evolution at: time ifAbsent: [ {} ]) size printOnFile: aStream.
+					(evolution at: time ifAbsent: [ {} ]) size printOn: aStream.
 					aStream nextPut: $,.
-					(correction at: time ifAbsent: [ {} ]) size printOnFile: aStream.
+					(correction at: time ifAbsent: [ {} ]) size printOn: aStream.
 					aStream nextPut: Character cr ] ]
 ]

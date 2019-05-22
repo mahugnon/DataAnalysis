@@ -81,5 +81,5 @@ CIMRAnalyser >> runGranger [
 		runCommand:
 			command , ' >' , outputFileName fullName , ' 2>'
 				, errorFileName fullName.
-	^ errorFileName asFileReference contents lines
+	^ errorFileName asFileReference 
 ]
